@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { crudDBService } from './shared/services/crudDB.service';
 // import { map } from 'rxjs/operators';
 
+//models
+// import { Car } from './shared/models/car';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,51 +17,43 @@ export class AppComponent implements OnInit {
 
   constructor(private crudDBService: crudDBService) { }
 
-  cars: any;
+  // cars: Array<Car>;
 
   ngOnInit() {
-    this.getCarsList();
-    console.log('getting data', this.crudDBService.carsList);
+    // this.getCarsList();
+
+    //to delete
+    // this.addCars();
   }
 
-  getCarsList() {
-    // Use snapshotChanges().map() to store the key
-    // this.crudDBService.getCarsList().snapshotChanges().pipe(
-    //   map(changes =>
-    //     changes.map(item => ({ key: item.payload.key, ...item.payload.val() }))
-    //   )
-    // ).subscribe(cars => {
-    //   this.cars = cars;
-    // });
 
-    this.crudDBService.getCarsList().snapshotChanges().subscribe(
-      list => {
-        this.cars = list.map(item => {
-          return {
-            key: item.key,
-            ...item.payload.val()
-          };
-        });
-      }
-    );
-  }
+  // addCars(): void {
+  //   this.crudDBService.addCar({
+  //     marque: 'Acura',
+  //     model: ['CL', 'EL', 'Integra', 'DX', 'NSX', 'RDX', 'RL', 'RSX', 'TL', 'TSX' ]
+  //   });
+  //   this.crudDBService.addCar({
+  //     marque: 'Alfa Romeo',
+  //     model: ['33', '75', '145', '146', '147', '155', '156', '159', '164', '166', 'Alfetta', 'Brera', 'GT', 'GTV', 'Giulietta', 'Spider']
+  //   });
+  // }
 
-  addCar(name, year) {
-    this.crudDBService.addCar({
-      name: name.value,
-      year: year.value
-    });
-    name.value = '';
-    year.value = '';
-  }
+  // addCar(name, year) {
+  //   this.crudDBService.addCar({
+  //     name: name.value,
+  //     year: year.value
+  //   });
+  //   name.value = '';
+  //   year.value = '';
+  // }
 
-  getCars() {
-    console.log('crud', this.cars);
-  }
+  // getCars() {
+  //   console.log('crud', this.cars);
+  // }
 
-  deleteCars() {
-    this.crudDBService.clearCarList();
-  }
+  // deleteCars() {
+  //   this.crudDBService.clearCarList();
+  // }
 
 
   //TEST
@@ -66,3 +61,5 @@ export class AppComponent implements OnInit {
 
 
 }
+
+

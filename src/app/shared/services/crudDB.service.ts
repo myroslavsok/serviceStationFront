@@ -1,23 +1,55 @@
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 
+//Models
+import { Car } from '../models/car';
+import { CarNgListElem } from '../models/carNgListElem';
+
 @Injectable()
 export class crudDBService {
 
-  carsList: AngularFireList<any> = null;
+  private dbPathCars = '/cars';
 
-  private dbPath = '/cars';
+  carsList: AngularFireList<any> = null;
+  cars: Array<Car> = null;
 
   constructor(private firebase: AngularFireDatabase) {
-    this.carsList = this.firebase.list(this.dbPath);
+              this.carsList = this.firebase.list(this.dbPathCars);
   }
 
-  getCarsList(): AngularFireList<any> {
-    return this.carsList;
+  //CRUD with cars
+  addCar(car: CarNgListElem): void {
+    console.log('[Service] car add', car);
+    this.carsList.push(car).catch(error => this.handleError(error));
   }
 
-  addCar(car: any): void {
-    this.carsList.push(car);
+  addModelToCar(car: {key: string, model: Array<string>}): void {
+    console.log('[Service] uppdating models', car);
+    this.carsList.update(car.key, {
+      model: car.model
+    }).catch(error => this.handleError(error));
+  }
+
+  getCarsArr(callback) {
+  //   // Use snapshotChanges().map() to store the key
+  //   // this.crudDBService.getCarsList().snapshotChanges().pipe(
+  //   //   map(changes =>
+  //   //     changes.map(item => ({ key: item.payload.key, ...item.payload.val() }))
+  //   //   )
+  //   // ).subscribe(cars => {
+  //   //   this.cars = cars;
+  //   // });
+    this.carsList.snapshotChanges().subscribe(
+      list => {
+        this.cars = list.map(item => {
+          return {
+            key: item.key,
+            ...item.payload.val()
+          };
+        });
+        callback();
+      }
+    );
   }
 
   clearCarList(): void {

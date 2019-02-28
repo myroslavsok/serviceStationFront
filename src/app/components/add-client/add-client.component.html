@@ -1,0 +1,42 @@
+<form>
+  <mat-form-field>
+    <input
+      type="text"
+      placeholder="Марка авто"
+      aria-label="Марка авто"
+      matInput
+      #carMarque
+      required
+      [formControl]="marqueControl"
+      [matAutocomplete]="autoMarqueField">
+    <mat-autocomplete #autoMarqueField="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptionsMarque | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="text"
+      placeholder="Модель марки"
+      aria-label="Модель марки"
+      matInput
+      #carModel
+      required
+      [formControl]="modelControl"
+      [matAutocomplete]="autoModelField">
+    <mat-autocomplete #autoModelField="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptionsModel | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <br>
+  <br>
+  <button (click)="send(carMarque, carModel)">SEND</button>
+</form>
+<br>
+<br>
+<button (click)="getCars()">Read</button>
