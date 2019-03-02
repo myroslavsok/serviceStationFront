@@ -1,0 +1,24 @@
+@import "../../shared/scss-variables-mixins/variables-mixins.scss";
+
+nav {
+  @include display-flex(row, space-around, center);
+  width: 100%;
+  height: $navbar-height;
+  background-color: $material-blue;
+
+  button {
+    flex-grow: 1;
+    font-size: 18px;
+    margin: 5px;
+    color: white;
+    font-weight: bold;
+    transition: all .3s linear;
+
+    &:hover {
+      background-color: $material-blue-dark;
+    }
+
+
+  }
+}
+

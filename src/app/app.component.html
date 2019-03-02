@@ -1,15 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<app-add-client></app-add-client>
+<!-- <app-add-client></app-add-client> -->
 
-<!-- <input type="text" placeholder="Car name" #name>
-<br>
-<br>
-<input type="text" placeholder="Car year" #year>
-<br>
-<br>
-<button (click)="addCar(name, year)">Add car</button>
-<button (click)="getCars()">Read</button>
-<button (click)="deleteCars()">Clear</button> -->
 
-<router-outlet></router-outlet>
+<nav>
+  <button mat-button routerLink="/add-client" routerLinkActive="active__link">Додати клієнта</button>
+  <button mat-button routerLink="/search-clients" routerLinkActive="active__link">Пошук клієнтів</button>
+</nav>
+
+<div class="main__container">
+  <router-outlet></router-outlet>
+</div>

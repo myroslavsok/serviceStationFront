@@ -13,6 +13,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
 
 //firebase
 import { AngularFireModule } from 'angularfire2';
@@ -24,12 +27,14 @@ import { crudDBService } from './shared/services/crudDB.service';
 //components
 import { AddClientComponent } from './components/add-client/add-client.component';
 import { SearchClientComponent } from './components/search-client/search-client.component';
+import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddClientComponent,
-    SearchClientComponent
+    SearchClientComponent,
+    UserNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,10 @@ import { SearchClientComponent } from './components/search-client/search-client.
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatTabsModule
   ],
   providers: [crudDBService],
   bootstrap: [AppComponent]
