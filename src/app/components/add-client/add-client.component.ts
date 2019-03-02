@@ -4,7 +4,6 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith, filter } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-add-client',

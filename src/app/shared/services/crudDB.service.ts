@@ -17,7 +17,7 @@ export class crudDBService {
               this.carsList = this.firebase.list(this.dbPathCars);
   }
 
-  //CRUD with cars
+  // CRUD with cars
   addCar(car: CarNgListElem): void {
     console.log('[Service] car add', car);
     this.carsList.push(car).catch(error => this.handleError(error));
@@ -55,6 +55,10 @@ export class crudDBService {
   clearCarList(): void {
     this.carsList.remove().catch(error => this.handleError(error));
   }
+
+
+  // CRUD with clients
+
 
   private handleError(error) {
     console.log(error);

@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 //materia design modules
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -52,7 +53,8 @@ import { UserNavbarComponent } from './components/user-navbar/user-navbar.compon
     MatButtonModule,
     MatButtonToggleModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    ScrollingModule
   ],
   providers: [crudDBService],
   bootstrap: [AppComponent]

@@ -7,10 +7,10 @@
       <h3>Особиста інформація клєнта</h3>
       <form>
           <mat-form-field>
-            <input matInput placeholder="ПІБ">
+            <input matInput placeholder="ПІБ" autocomplete="off">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Номер телофону">
+            <input matInput placeholder="Номер телефону" autocomplete="off">
           </mat-form-field>
       </form>
 
@@ -49,13 +49,13 @@
           </mat-autocomplete>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Рік випуску автомобіля">
+          <input matInput placeholder="Рік випуску автомобіля" autocomplete="off">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Vin-код" required>
+          <input matInput placeholder="Vin-код" required autocomplete="off">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Державний номер" required>
+            <input matInput placeholder="Державний номер" required autocomplete="off">
          </mat-form-field>
       </form>
 
@@ -66,13 +66,13 @@
         bred for hunting.
       </p>
     </mat-card-content>
-    <mat-card-actions class=actions__panel>
+    <mat-card-actions class="actions__panel">
       <button mat-button class="add__btn" (click)="send(carMarque, carModel)">ДОДАТИ</button>
     </mat-card-actions>
 </mat-card>
 
 
-<!-- <form>
+<form>
   <mat-form-field>
     <input
       type="text"
@@ -111,7 +111,7 @@
   <br>
   <button (click)="send(carMarque, carModel)">SEND</button>
 
-</form> -->
+</form>
 <br>
 <br>
 <button (click)="getCars()">Read</button>
