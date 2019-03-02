@@ -23,11 +23,13 @@ import { crudDBService } from './shared/services/crudDB.service';
 
 //components
 import { AddClientComponent } from './components/add-client/add-client.component';
+import { SearchClientComponent } from './components/search-client/search-client.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddClientComponent
+    AddClientComponent,
+    SearchClientComponent
   ],
   imports: [
     BrowserModule,
