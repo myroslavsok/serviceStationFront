@@ -31,23 +31,23 @@ export class AddClientComponent implements OnInit {
           startWith(''),
           map(value => this._filterMarque(value))
         );
-      this.filteredOptionsModel = this.modelControl.valueChanges
-        .pipe(
-          startWith(''),
-          map(value => this._filterModel(value))
-        );
     });
   }
 
   private _filterMarque(value: string): string[] {
     const filterValue = value.toLowerCase();
+    this.filteredOptionsModel = this.modelControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(element => this._filterModel(element))
+        );
     return this.crudDBService.cars
       .map(item => item.marque)
       .filter(option => option.toLowerCase().includes(filterValue));
   }
 
   private _filterModel(value: string): string[] {
-      console.log('works');
+    console.log('works => ', 'd');
     const filterValue = value.toLowerCase();
     const carMarque = this.carMarque.nativeElement.value;
     let carModelsArr = [];
