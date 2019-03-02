@@ -1,5 +1,78 @@
-<!-- <app-user-navbar></app-user-navbar> -->
-<form>
+<mat-card class="client__info__card">
+    <mat-card-header>
+      <mat-card-title>Вкажіть інформацію про клієнта</mat-card-title>
+      <mat-card-subtitle>поля позначені * є обов'язковими</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h3>Особиста інформація клєнта</h3>
+      <form>
+          <mat-form-field>
+            <input matInput placeholder="ПІБ">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Номер телофону">
+          </mat-form-field>
+      </form>
+
+      <h3>Авто</h3>
+      <form>
+        <mat-form-field>
+          <input
+          type="text"
+          placeholder="Марка авто"
+          aria-label="Марка авто"
+          matInput
+          #carMarque
+          required
+          [formControl]="marqueControl"
+          [matAutocomplete]="autoMarqueField">
+          <mat-autocomplete #autoMarqueField="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptionsMarque | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          type="text"
+          placeholder="Модель марки"
+          aria-label="Модель марки"
+          matInput
+          #carModel
+          required
+          [formControl]="modelControl"
+          [matAutocomplete]="autoModelField">
+          <mat-autocomplete #autoModelField="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptionsModel | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Рік випуску автомобіля">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Vin-код" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Державний номер" required>
+         </mat-form-field>
+      </form>
+
+        <h3>Що ремонтуємо?</h3>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions class=actions__panel>
+      <button mat-button class="add__btn" (click)="send(carMarque, carModel)">ДОДАТИ</button>
+    </mat-card-actions>
+</mat-card>
+
+
+<!-- <form>
   <mat-form-field>
     <input
       type="text"
@@ -37,7 +110,8 @@
   <br>
   <br>
   <button (click)="send(carMarque, carModel)">SEND</button>
-</form>
+
+</form> -->
 <br>
 <br>
 <button (click)="getCars()">Read</button>

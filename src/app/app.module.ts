@@ -16,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 
 //firebase
 import { AngularFireModule } from 'angularfire2';
@@ -50,7 +51,8 @@ import { UserNavbarComponent } from './components/user-navbar/user-navbar.compon
     MatSnackBarModule,
     MatButtonModule,
     MatButtonToggleModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCardModule
   ],
   providers: [crudDBService],
   bootstrap: [AppComponent]

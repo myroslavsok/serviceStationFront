@@ -1,0 +1,21 @@
+@import "../../shared/scss-variables-mixins/variables-mixins.scss";
+
+.client__info__card {
+  @include max-width(800px);
+  margin: 20px auto;
+  border-top: 5px solid $material-blue-dark;
+}
+
+form mat-form-field {
+  margin: 10px 20px;
+}
+
+
+.actions__panel {
+  display: flex;
+  .add__btn {
+    margin-left: auto;
+    color: white;
+    background-color: $material-green;
+  }
+}
