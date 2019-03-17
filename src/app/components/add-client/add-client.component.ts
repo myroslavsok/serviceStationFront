@@ -61,7 +61,8 @@ export class AddClientComponent implements OnInit {
       .filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  send(marque, model) {
+  send(marque, model, carYear, vinCode, carNumber, clientName, clientPhoneNumber) {
+    // working with cars
     if (!marque.value || !model.value) {
       return this.snackBar.open('Заповніть поля з маркою та моделлю авто', 'Зрозуміло', {
         duration: 2000,
@@ -103,12 +104,30 @@ export class AddClientComponent implements OnInit {
         model: [model.value]
       });
     }
+
+    // working with client
+    // marque, model, carYear, vinCode, carNumber, clientName, clientPhoneNumber
+    const client = {
+      name: clientName.value,
+      phone: clientPhoneNumber.value,
+      car: {
+        marque: marque.value,
+        model: model.value,
+        year: carYear.value,
+        number: carNumber.value,
+        vin: vinCode.value
+      }
+    }
+    console.log('client', client);
+    this.crudDBService.addClient(client);
+    this.snackBar.open('Клієнт успішно доданий до бази', 'Зрозуміло', {
+      duration: 2000,
+    });
   }
 
 
   getCars() {
     console.log('crud cars', this.crudDBService.cars);
-    console.log('crud angular cars', this.crudDBService.carsList);
   }
 
 

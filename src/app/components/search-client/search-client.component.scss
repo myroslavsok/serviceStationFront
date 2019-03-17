@@ -1,0 +1,7 @@
+@import "../../shared/scss-variables-mixins/variables-mixins.scss";
+
+.client__cars {
+  @include max-width(800px);
+   margin: 20px auto;
+   border-top: 5px solid $material-blue-dark;
+}

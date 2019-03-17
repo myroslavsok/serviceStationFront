@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { crudDBService } from '../../shared/services/crudDB.service';
+
 @Component({
   selector: 'app-search-client',
   templateUrl: './search-client.component.html',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchClientComponent implements OnInit {
 
-  constructor() { }
+  constructor(private crudDBService: crudDBService) { }
+
+  clients = [];
+
+  test = [1, 2, 3];
 
   ngOnInit() {
+    this.crudDBService.getClientsArr(() => {
+      this.clients = this.crudDBService.clients;
+      console.log('clients', this.clients);
+    });
+  }
+
+   read() {
+     console.log('clients', this.clients);
   }
 
 }

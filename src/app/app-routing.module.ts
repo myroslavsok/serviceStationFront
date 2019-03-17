@@ -6,8 +6,10 @@ import { AddClientComponent } from './components/add-client/add-client.component
 import { SearchClientComponent } from './components/search-client/search-client.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'add-client', pathMatch: 'full' },
   { path: 'add-client', component: AddClientComponent },
-  { path: 'search-clients', component: SearchClientComponent }
+  { path: 'search-clients', component: SearchClientComponent },
+  { path: '**', redirectTo: 'add-client', pathMatch: 'full' }
 ];
 
 @NgModule({

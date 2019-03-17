@@ -7,10 +7,10 @@
       <h3>Особиста інформація клєнта</h3>
       <form>
           <mat-form-field>
-            <input matInput placeholder="ПІБ" autocomplete="off">
+            <input matInput placeholder="ПІБ" #clientName autocomplete="off" value="Mirek Sokol Test">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Номер телефону" autocomplete="off">
+            <input matInput placeholder="Номер телефону" #clientPhoneNumber autocomplete="off" value="333">
           </mat-form-field>
       </form>
 
@@ -49,13 +49,13 @@
           </mat-autocomplete>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Рік випуску автомобіля" autocomplete="off">
+          <input matInput placeholder="Рік випуску автомобіля" #carYear autocomplete="off" value="2019">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Vin-код" required autocomplete="off">
+          <input matInput placeholder="Vin-код" required #vinCode autocomplete="off" value="vin code">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Державний номер" required autocomplete="off">
+            <input matInput placeholder="Державний номер" required #carNumber autocomplete="off" value="car number">
          </mat-form-field>
       </form>
 
@@ -67,51 +67,14 @@
       </p>
     </mat-card-content>
     <mat-card-actions class="actions__panel">
-      <button mat-button class="add__btn" (click)="send(carMarque, carModel)">ДОДАТИ</button>
+      <button
+        mat-button class="add__btn"
+        (click)="send(carMarque, carModel, carYear, vinCode,
+                      carNumber, clientName, clientPhoneNumber)">ДОДАТИ</button>
     </mat-card-actions>
 </mat-card>
 
 
-<form>
-  <mat-form-field>
-    <input
-      type="text"
-      placeholder="Марка авто"
-      aria-label="Марка авто"
-      matInput
-      #carMarque
-      required
-      [formControl]="marqueControl"
-      [matAutocomplete]="autoMarqueField">
-    <mat-autocomplete #autoMarqueField="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptionsMarque | async" [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
-  <mat-form-field>
-    <input
-      type="text"
-      placeholder="Модель марки"
-      aria-label="Модель марки"
-      matInput
-      #carModel
-      required
-      [formControl]="modelControl"
-      [matAutocomplete]="autoModelField">
-    <mat-autocomplete #autoModelField="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptionsModel | async" [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
-  <br>
-  <br>
-  <button (click)="send(carMarque, carModel)">SEND</button>
-
-</form>
 <br>
 <br>
 <button (click)="getCars()">Read</button>
