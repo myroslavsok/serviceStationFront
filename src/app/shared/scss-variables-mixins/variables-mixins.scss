@@ -1,0 +1,29 @@
+//common variables
+$material-blue: #3F51B5;
+$material-blue-dark: #002984;
+$material-green: #28A745;
+$material-background-color: #B3E7FA; //delete
+
+//common mixins
+@mixin display-flex($layout, $main-axis, $secondary-axis) {
+  display: flex;
+  flex-direction: $layout;
+  justify-content: $main-axis;
+  align-content: $secondary-axis;
+}
+
+@mixin max-width($ordinary-width) {
+  max-width: 100%;
+  width: $ordinary-width;
+}
+
+@mixin test($border-width, $border-color, $background-color) {
+  border: $border-width solid $border-color;
+  background-color: $background-color;
+}
+
+
+//user navbar
+$navbar-height: 60px; // delete in navbar component
+
+
