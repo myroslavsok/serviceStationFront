@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith, filter } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+import { detectChangesInternal } from '@angular/core/src/render3/instructions';
 
 
 @Component({
@@ -27,9 +28,12 @@ export class AddClientComponent implements OnInit {
 
   // Car's details
   carsDetails: Array<{
-    name: string;
-    cost: number;
+    id;
+    name;
+    cost;
   }> = [];
+
+  totalDetailCost: number = 0;
 
   ngOnInit() {
     this.crudDBService.getCarsArr(() => {
@@ -145,13 +149,27 @@ export class AddClientComponent implements OnInit {
       });
     }
     this.carsDetails.push({
+      id: this.carsDetails.length + 1,
       name: detailName.value,
       cost: detailCost.value
     });
-    console.log(this.carsDetails);
+    this.calculateTotalDetailCost();
   }
 
+  deleteDetail(carDetailId) {
+    this.carsDetails = this.carsDetails.filter(detail => {
+      return (detail.id === carDetailId) ? false : true;
+    });
+    this.calculateTotalDetailCost();
+  }
 
+  calculateTotalDetailCost() {
+    let detailCost = 0;
+    this.carsDetails.forEach(detail => {
+      detailCost += parseInt(detail.cost);
+    });
+    this.totalDetailCost = detailCost;
+  }
 
 
 }

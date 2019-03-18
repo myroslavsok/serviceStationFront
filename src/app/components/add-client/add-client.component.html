@@ -49,7 +49,7 @@
           </mat-autocomplete>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Рік випуску автомобіля" #carYear autocomplete="off" value="2019">
+          <input matInput type="number" placeholder="Рік випуску автомобіля" #carYear autocomplete="off" value="2019">
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code">
@@ -58,7 +58,7 @@
             <input matInput placeholder="Державний номер" #carNumber autocomplete="off" value="car number">
          </mat-form-field>
          <mat-form-field>
-            <input matInput placeholder="Пробіг (км)" #runPeriod autocomplete="off" value="1000">
+            <input matInput type="number" placeholder="Пробіг (км)" #runPeriod autocomplete="off" value="1000">
          </mat-form-field>
       </form>
 
@@ -80,16 +80,17 @@
               <input matInput #detailName placeholder="Назва">
             </mat-form-field>
             <mat-form-field class="cardetail__info__input">
-              <input matInput #detailCost placeholder="Ціна">
+              <input matInput type="number" #detailCost placeholder="Ціна">
             </mat-form-field>
           </div>
           <button mat-stroked-button color="primary" class="cardetail__info__btn" (click)="addNewDetail(detailName, detailCost)">Додати</button>
         </div>
         <div class="added__details">
           <mat-chip-list class="detail">
-              <mat-chip *ngFor="let carDetail of carsDetails" class="detail__chip">{{ carDetail.name }} <span class="detail__cost">{{ carDetail.cost }} Грн</span> <button class="detail__delete">✖</button></mat-chip>
+              <mat-chip *ngFor="let carDetail of carsDetails" class="detail__chip">{{ carDetail.name }} <span class="detail__cost">{{ carDetail.cost }} Грн</span> <button (click)="deleteDetail(carDetail.id)" class="detail__delete">✖</button></mat-chip>
           </mat-chip-list>
         </div>
+        <h4>Загальна вартість: {{ totalDetailCost }} Грн</h4>
     </mat-card-content>
     <mat-card-actions class="actions__panel">
       <button
