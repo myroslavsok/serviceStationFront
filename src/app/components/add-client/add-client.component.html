@@ -52,14 +52,39 @@
           <input matInput placeholder="Рік випуску автомобіля" #carYear autocomplete="off" value="2019">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Vin-код" required #vinCode autocomplete="off" value="vin code">
+          <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Державний номер" required #carNumber autocomplete="off" value="car number">
+            <input matInput placeholder="Державний номер" #carNumber autocomplete="off" value="car number">
+         </mat-form-field>
+         <mat-form-field>
+            <input matInput placeholder="Пробіг (км)" #runPeriod autocomplete="off" value="1000">
          </mat-form-field>
       </form>
 
         <h3>Що ремонтуємо?</h3>
+        <mat-form-field appearance="outline" class="done__work__input">
+          <mat-label>Виконана робота</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="10"
+            cdkAutosizeMaxRows="10"
+            placeholder="Виконана робота"
+          ></textarea>
+        </mat-form-field>
+        <h4>Запчастини</h4>
+        <div class="add__spare__part__cont">
+          <div class="spare__part__info">
+            <mat-form-field class="spare__part__input">
+              <input matInput placeholder="Назва">
+            </mat-form-field>
+            <mat-form-field class="spare__part__input">
+              <input matInput placeholder="Ціна">
+            </mat-form-field>
+          </div>
+          <button mat-stroked-button class="spare__part__btn">Додати</button>
+        </div>
         <p>
           The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
           A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally

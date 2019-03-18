@@ -20,3 +20,12 @@ form mat-form-field {
     background-color: $material-green;
   }
 }
+
+.done__work__input {
+  width: 100%;
+
+  textarea {
+    resize: none;
+  }
+}
+

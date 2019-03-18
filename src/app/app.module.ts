@@ -56,7 +56,9 @@ import { UserNavbarComponent } from './components/user-navbar/user-navbar.compon
     MatCardModule,
     ScrollingModule
   ],
-  providers: [crudDBService],
+  providers: [
+    crudDBService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

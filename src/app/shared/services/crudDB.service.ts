@@ -81,7 +81,6 @@ export class crudDBService {
     this.clientsList.push(client).catch(error => this.handleError(error));
   }
 
-
   private handleError(error) {
     console.log(error);
   }
