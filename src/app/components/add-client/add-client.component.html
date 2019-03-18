@@ -73,23 +73,23 @@
             placeholder="Виконана робота"
           ></textarea>
         </mat-form-field>
-        <h4>Запчастини</h4>
-        <div class="add__spare__part__cont">
-          <div class="spare__part__info">
-            <mat-form-field class="spare__part__input">
-              <input matInput placeholder="Назва">
+        <h4>Додати запчастину</h4>
+        <div class="add__cardetail__cont">
+          <div class="cardetail__info">
+            <mat-form-field class="cardetail__info__input">
+              <input matInput #detailName placeholder="Назва">
             </mat-form-field>
-            <mat-form-field class="spare__part__input">
-              <input matInput placeholder="Ціна">
+            <mat-form-field class="cardetail__info__input">
+              <input matInput #detailCost placeholder="Ціна">
             </mat-form-field>
           </div>
-          <button mat-stroked-button class="spare__part__btn">Додати</button>
+          <button mat-stroked-button color="primary" class="cardetail__info__btn" (click)="addNewDetail(detailName, detailCost)">Додати</button>
         </div>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
+        <div class="added__details">
+          <mat-chip-list class="detail">
+              <mat-chip *ngFor="let carDetail of carsDetails" class="detail__chip">{{ carDetail.name }} <span class="detail__cost">{{ carDetail.cost }} Грн</span> <button class="detail__delete">✖</button></mat-chip>
+          </mat-chip-list>
+        </div>
     </mat-card-content>
     <mat-card-actions class="actions__panel">
       <button

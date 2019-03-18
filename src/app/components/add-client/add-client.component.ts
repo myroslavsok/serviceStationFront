@@ -25,6 +25,12 @@ export class AddClientComponent implements OnInit {
 
   @ViewChild('carMarque') carMarque: ElementRef;
 
+  // Car's details
+  carsDetails: Array<{
+    name: string;
+    cost: number;
+  }> = [];
+
   ngOnInit() {
     this.crudDBService.getCarsArr(() => {
       this.filteredOptionsMarque = this.marqueControl.valueChanges
@@ -129,6 +135,20 @@ export class AddClientComponent implements OnInit {
 
   getCars() {
     console.log('crud cars', this.crudDBService.cars);
+  }
+
+
+  addNewDetail(detailName, detailCost) {
+    if (!detailName.value) {
+      return this.snackBar.open('Вкажіть назву деталі', 'Зрозуміло', {
+        duration: 2000,
+      });
+    }
+    this.carsDetails.push({
+      name: detailName.value,
+      cost: detailCost.value
+    });
+    console.log(this.carsDetails);
   }
 
 
