@@ -4,8 +4,13 @@
       <mat-card-subtitle>поля позначені * є обов'язковими</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <h3>Особиста інформація клєнта</h3>
+      <h3>Загальна інформація про клєнта</h3>
       <form>
+          <mat-form-field>
+            <input matInput [matDatepicker]="dp" placeholder="Дата оформлення замовлення" [formControl]="date">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="ПІБ" #clientName autocomplete="off" value="Mirek Sokol Test">
           </mat-form-field>
