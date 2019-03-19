@@ -3,24 +3,26 @@
       <mat-card-title>Вкажіть інформацію про клієнта</mat-card-title>
       <mat-card-subtitle>поля позначені * є обов'язковими</mat-card-subtitle>
     </mat-card-header>
+
+    <form (ngSubmit)="addClient(addClientForm)"  #addClientForm="ngForm">
     <mat-card-content>
       <h3>Загальна інформація про клєнта</h3>
-      <form>
+      <fieldset>
           <mat-form-field>
-            <input matInput [matDatepicker]="dp" placeholder="Дата оформлення замовлення" [formControl]="date">
+            <input matInput [matDatepicker]="dp" placeholder="Дата оформлення замовлення" [formControl]="date" name="date" ngModel>
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="ПІБ" #clientName autocomplete="off" value="Mirek Sokol Test">
+            <input matInput placeholder="ПІБ" #clientName autocomplete="off" value="Mirek Sokol Test" name="name" ngModel>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Номер телефону" #clientPhoneNumber autocomplete="off" value="333">
+            <input matInput placeholder="Номер телефону" #clientPhoneNumber autocomplete="off" value="333" name="telephoneNumber" ngModel>
           </mat-form-field>
-      </form>
+      </fieldset>
 
       <h3>Авто</h3>
-      <form>
+      <fieldset>
         <mat-form-field>
           <input
           type="text"
@@ -29,6 +31,8 @@
           matInput
           #carMarque
           required
+          name="carMarque"
+          ngModel
           [formControl]="marqueControl"
           [matAutocomplete]="autoMarqueField">
           <mat-autocomplete #autoMarqueField="matAutocomplete">
@@ -45,6 +49,8 @@
           matInput
           #carModel
           required
+          name="carModel"
+          ngModel
           [formControl]="modelControl"
           [matAutocomplete]="autoModelField">
           <mat-autocomplete #autoModelField="matAutocomplete">
@@ -54,20 +60,21 @@
           </mat-autocomplete>
         </mat-form-field>
         <mat-form-field>
-          <input matInput type="number" placeholder="Рік випуску автомобіля" #carYear autocomplete="off" value="2019">
+          <input matInput type="number" placeholder="Рік випуску автомобіля" #carYear autocomplete="off" value="2019" name="carYear" ngModel>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code">
+          <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code" name="vinCode" ngModel>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Державний номер" #carNumber autocomplete="off" value="car number">
+            <input matInput placeholder="Державний номер" #carNumber autocomplete="off" value="car number" name="carNumber" ngModel>
          </mat-form-field>
          <mat-form-field>
-            <input matInput type="number" placeholder="Пробіг (км)" #runPeriod autocomplete="off" value="1000">
+            <input matInput type="number" placeholder="Пробіг (км)" #runPeriod autocomplete="off" value="1000" name="runPeriod" ngModel>
          </mat-form-field>
-      </form>
+      </fieldset>
 
         <h3>Що ремонтуємо?</h3>
+        <fieldset>
         <mat-form-field appearance="outline" class="done__work__input">
           <mat-label>Виконана робота</mat-label>
           <textarea
@@ -76,9 +83,14 @@
             cdkAutosizeMinRows="10"
             cdkAutosizeMaxRows="10"
             placeholder="Виконана робота"
+            name="doneWork"
+            ngModel
           ></textarea>
         </mat-form-field>
-        <h4>Додати запчастину</h4>
+      </fieldset>
+
+      <h4>Додати запчастину</h4>
+        <fieldset>
         <div class="add__cardetail__cont">
           <div class="cardetail__info">
             <mat-form-field class="cardetail__info__input">
@@ -95,14 +107,22 @@
               <mat-chip *ngFor="let carDetail of carsDetails" class="detail__chip">{{ carDetail.name }} <span class="detail__cost">{{ carDetail.cost }} Грн</span> <button (click)="deleteDetail(carDetail.id)" class="detail__delete">✖</button></mat-chip>
           </mat-chip-list>
         </div>
-        <h4>Загальна вартість: {{ totalDetailCost }} Грн</h4>
+        <h4 class="total__details__cost">Загальна вартість: {{ totalDetailCost }} Грн</h4>
+      </fieldset>
     </mat-card-content>
     <mat-card-actions class="actions__panel">
-      <button
-        mat-button class="add__btn"
+        <button
+        class="add__btn"
+        mat-button
+        type="submit">ДОДАТИ</button>
+      <!-- <button
+        class="add__btn"
+        mat-button
+        type="submit"
         (click)="send(carMarque, carModel, carYear, vinCode,
-                      carNumber, clientName, clientPhoneNumber)">ДОДАТИ</button>
+                      carNumber, clientName, clientPhoneNumber)">ДОДАТИ</button> -->
     </mat-card-actions>
+  </form>
 </mat-card>
 
 

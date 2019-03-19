@@ -4,7 +4,6 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith, filter } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
-import { detectChangesInternal } from '@angular/core/src/render3/instructions';
 
 // Imports for date
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
@@ -160,6 +159,9 @@ export class AddClientComponent implements OnInit {
     });
   }
 
+  addClient(addClientForm) {
+    console.log("Form", addClientForm.value);
+  }
 
   getCars() {
     console.log('crud cars', this.crudDBService.cars);

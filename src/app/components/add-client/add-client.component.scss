@@ -1,12 +1,23 @@
 @import "../../shared/scss-variables-mixins/variables-mixins.scss";
 
+* {
+  box-sizing: border-box;
+}
+
 .client__info__card {
   @include max-width(800px);
   margin: 20px auto;
   border-top: 5px solid $material-blue-dark;
 }
 
-form mat-form-field {
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+fieldset mat-form-field {
   margin: 10px 20px;
 }
 
@@ -21,7 +32,8 @@ form mat-form-field {
 }
 
 .done__work__input {
-  width: 100%;
+  width: 95%;
+  margin: auto;
 
   textarea {
     resize: none;
@@ -79,4 +91,3 @@ form mat-form-field {
     cursor: pointer;
   }
 }
-
