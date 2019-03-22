@@ -97,70 +97,6 @@ export class AddClientComponent implements OnInit {
       .filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  // send(marque, model, carYear, vinCode, carNumber, clientName, clientPhoneNumber) {
-  //   // working with cars
-  //   if (!marque.value || !model.value) {
-  //     return this.snackBar.open('Заповніть поля з маркою та моделлю авто', 'Зрозуміло', {
-  //       duration: 2000,
-  //     });
-  //   }
-
-  //   let isCarMarqueNew__key = '';
-  //   let isCarModelNew = false;
-
-  //   this.crudDBService.cars.forEach(item => {
-  //     if (item.marque === marque.value) {
-  //       isCarMarqueNew__key = item.key;
-  //       item.model.forEach(elem => {
-  //         if (elem === model.value) {
-  //           isCarModelNew = true;
-  //         }
-  //       });
-  //     }
-  //   });
-  //   if (isCarMarqueNew__key && isCarModelNew) {
-  //     console.log('assign car to client');
-  //   } else if (isCarMarqueNew__key && !isCarModelNew) {
-  //     console.log('adding model to', isCarMarqueNew__key);
-  //     let existingModels = [];
-  //     this.crudDBService.cars
-  //       .forEach(item => {
-  //         if (item.key === isCarMarqueNew__key) {
-  //           existingModels = item.model;
-  //         }
-  //       });
-  //     existingModels.push(model.value);
-  //     this.crudDBService.addModelToCar({
-  //       key: isCarMarqueNew__key,
-  //       model: existingModels
-  //     });
-  //   } else if (!isCarMarqueNew__key) {
-  //     this.crudDBService.addCar({
-  //       marque: marque.value,
-  //       model: [model.value]
-  //     });
-  //   }
-//
-    // working with client
-    // marque, model, carYear, vinCode, carNumber, clientName, clientPhoneNumber
-  //   const client = {
-  //     name: clientName.value,
-  //     phone: clientPhoneNumber.value,
-  //     car: {
-  //       marque: marque.value,
-  //       model: model.value,
-  //       year: carYear.value,
-  //       number: carNumber.value,
-  //       vin: vinCode.value
-  //     }
-  //   }
-  //   console.log('client', client);
-  //   this.crudDBService.addClient(client);
-  //   this.snackBar.open('Клієнт успішно доданий до бази', 'Зрозуміло', {
-  //     duration: 2000,
-  //   });
-  // }
-
   addCarToDBIfNotExists(marque, model) {
     console.log('add car', `${marque}, ${model}`);
     if (!marque || !model) {
@@ -231,6 +167,10 @@ export class AddClientComponent implements OnInit {
     this.addCarToDBIfNotExists(client.carInfo.marque, client.carInfo.model);
     this.clearForm(addClientForm);
     console.log('Client', client);
+    // this.crudDBService.addClient(client);
+    // this.snackBar.open('Клієнт успішно доданий до бази', 'Зрозуміло', {
+    //   duration: 2000,
+    // });
   }
 
   getCars() {

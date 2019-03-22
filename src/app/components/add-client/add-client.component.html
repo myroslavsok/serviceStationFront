@@ -113,20 +113,15 @@
                 class="detail__chip">{{ carDetail.name }} <span class="detail__cost">{{ carDetail.cost }} Грн</span> <button (click)="deleteDetail(carDetail.id)" class="detail__delete">✖</button></mat-chip>
           </mat-chip-list>
         </div>
-        <h4 class="total__details__cost">Загальна вартість: {{ totalDetailCost }} Грн</h4>
+        <h4 class="total__details__cost">Загальна вартість делатей: {{ totalDetailCost }} Грн</h4>
       </div>
     </mat-card-content>
     <mat-card-actions class="actions__panel">
         <button
-        class="add__btn"
-        mat-button
-        type="submit">ПІДТВЕРДИТИ</button>
-      <!-- <button
-        class="add__btn"
-        mat-button
-        type="submit"
-        (click)="send(carMarque, carModel, carYear, vinCode,
-                      carNumber, clientName, clientPhoneNumber)">ДОДАТИ</button> -->
+          class="add__btn"
+          mat-button
+          type="submit"
+        >ПІДТВЕРДИТИ</button>
     </mat-card-actions>
   </form>
 </mat-card>
