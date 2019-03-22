@@ -142,8 +142,8 @@ export class AddClientComponent implements OnInit {
 
   clearForm(form) {
     form.reset();
-    this.marqueControl.reset();
-    this.modelControl.reset();
+    this.marqueControl.setValue('');
+    this.modelControl.setValue('');
     this.detailName.nativeElement.value = '';
     this.detailCost.nativeElement.value = '';
     this.carsDetails = [];
