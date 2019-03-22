@@ -7,9 +7,9 @@
     <form (ngSubmit)="addClient(addClientForm)"  #addClientForm="ngForm">
     <mat-card-content>
       <h3>Загальна інформація про клєнта</h3>
-      <fieldset>
+      <div ngModelGroup="clientInfo" #clientInfo="ngModelGroup">
           <mat-form-field>
-            <input matInput [matDatepicker]="dp" placeholder="Дата оформлення замовлення" [formControl]="date" name="date" ngModel>
+            <input matInput [matDatepicker]="dp" placeholder="Дата оформлення замовлення" [formControl]="date" name="date">
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
           </mat-form-field>
@@ -17,12 +17,12 @@
             <input matInput placeholder="ПІБ" #clientName autocomplete="off" value="Mirek Sokol Test" name="name" ngModel>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Номер телефону" #clientPhoneNumber autocomplete="off" value="333" name="telephoneNumber" ngModel>
+            <input matInput placeholder="Номер телефону" #clientPhoneNumber autocomplete="off" value="333" name="phoneNumber" ngModel>
           </mat-form-field>
-      </fieldset>
+      </div>
 
       <h3>Авто</h3>
-      <fieldset>
+      <div ngModelGroup="carInfo" #carInfo="ngModelGroup">
         <mat-form-field>
           <input
           type="text"
@@ -30,9 +30,7 @@
           aria-label="Марка авто"
           matInput
           #carMarque
-          required
           name="carMarque"
-          ngModel
           [formControl]="marqueControl"
           [matAutocomplete]="autoMarqueField">
           <mat-autocomplete #autoMarqueField="matAutocomplete">
@@ -48,9 +46,7 @@
           aria-label="Модель марки"
           matInput
           #carModel
-          required
           name="carModel"
-          ngModel
           [formControl]="modelControl"
           [matAutocomplete]="autoModelField">
           <mat-autocomplete #autoModelField="matAutocomplete">
@@ -69,12 +65,12 @@
             <input matInput placeholder="Державний номер" #carNumber autocomplete="off" value="car number" name="carNumber" ngModel>
          </mat-form-field>
          <mat-form-field>
-            <input matInput type="number" placeholder="Пробіг (км)" #runPeriod autocomplete="off" value="1000" name="runPeriod" ngModel>
+            <input matInput type="number" placeholder="Пробіг (км)" #miles autocomplete="off" value="1000" name="miles" ngModel>
          </mat-form-field>
-      </fieldset>
+      </div>
 
         <h3>Що ремонтуємо?</h3>
-        <fieldset>
+        <div ngModelGroup="workInfo" #workInfo="ngModelGroup">
         <mat-form-field appearance="outline" class="done__work__input">
           <mat-label>Виконана робота</mat-label>
           <textarea
@@ -87,11 +83,19 @@
             ngModel
           ></textarea>
         </mat-form-field>
-      </fieldset>
+        <mat-form-field>
+          <input
+             matInput type="number"
+             placeholder="Вартість робіт (грн)"
+             #workCost
+             autocomplete="off"
+             name="workCost"
+          >
+       </mat-form-field>
+      </div>
 
       <h4>Додати запчастину</h4>
-        <fieldset>
-        <div class="add__cardetail__cont">
+        <div>
           <div class="cardetail__info">
             <mat-form-field class="cardetail__info__input">
               <input matInput #detailName placeholder="Назва">
@@ -99,22 +103,23 @@
             <mat-form-field class="cardetail__info__input">
               <input matInput type="number" #detailCost placeholder="Ціна">
             </mat-form-field>
+            <button mat-stroked-button color="primary" class="cardetail__info__btn" type="button" (click)="addNewDetail(detailName, detailCost)">Додати запчастину</button>
           </div>
-          <button mat-stroked-button color="primary" class="cardetail__info__btn" (click)="addNewDetail(detailName, detailCost)">Додати</button>
-        </div>
         <div class="added__details">
           <mat-chip-list class="detail">
-              <mat-chip *ngFor="let carDetail of carsDetails" class="detail__chip">{{ carDetail.name }} <span class="detail__cost">{{ carDetail.cost }} Грн</span> <button (click)="deleteDetail(carDetail.id)" class="detail__delete">✖</button></mat-chip>
+              <mat-chip
+                *ngFor="let carDetail of carsDetails"
+                class="detail__chip">{{ carDetail.name }} <span class="detail__cost">{{ carDetail.cost }} Грн</span> <button (click)="deleteDetail(carDetail.id)" class="detail__delete">✖</button></mat-chip>
           </mat-chip-list>
         </div>
         <h4 class="total__details__cost">Загальна вартість: {{ totalDetailCost }} Грн</h4>
-      </fieldset>
+      </div>
     </mat-card-content>
     <mat-card-actions class="actions__panel">
         <button
         class="add__btn"
         mat-button
-        type="submit">ДОДАТИ</button>
+        type="submit">ПІДТВЕРДИТИ</button>
       <!-- <button
         class="add__btn"
         mat-button

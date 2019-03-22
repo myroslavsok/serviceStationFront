@@ -10,14 +10,7 @@
   border-top: 5px solid $material-blue-dark;
 }
 
-fieldset {
-  border: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-fieldset mat-form-field {
+div mat-form-field {
   margin: 10px 20px;
 }
 
@@ -40,30 +33,30 @@ fieldset mat-form-field {
   }
 }
 
-.add__cardetail__cont {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   .cardetail__info {
-    width: 60%;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
 
     .cardetail__info__input {
-      width: 40%;
+      width: 20%;
       min-width: 200px;
+      margin: 0 20px;
+
+      &:nth-child(2) {
+        margin-right: 40px;
+      }
+
+    }
+
+    .cardetail__info__btn {
+      margin: 0 20px;
     }
 
   }
 
-  .cardetail__info__btn {
-
-  }
-
-}
 
 .added__details {
   width: 100%;
