@@ -46,7 +46,9 @@ export class AddClientComponent implements OnInit {
   filteredOptionsModel: Observable<string[]>;
 
   @ViewChild('carMarque') carMarque: ElementRef;
-  @ViewChild('workCost') totalWorlCost: ElementRef;
+  @ViewChild('detailName') detailName: ElementRef;
+  @ViewChild('detailCost') detailCost: ElementRef;
+
 
   // Car's details
   carsDetails: Array<{
@@ -202,6 +204,15 @@ export class AddClientComponent implements OnInit {
     }
   }
 
+  clearForm(form) {
+    form.reset();
+    this.marqueControl.reset();
+    this.modelControl.reset();
+    this.detailName.nativeElement.value = '';
+    this.detailCost.nativeElement.value = '';
+    this.carsDetails = [];
+  }
+
   addClient(addClientForm) {
     let client = {
       clientInfo: addClientForm.value.clientInfo,
@@ -213,12 +224,12 @@ export class AddClientComponent implements OnInit {
     client.carInfo.model = this.modelControl.value;
     client.carInfo.detais = this.carsDetails;
     client.workInfo.detailCost = this.totalDetailCost;
-    let workCost = this.totalWorlCost.nativeElement.value;
-    if (!workCost) {
-      workCost = 0;
+    if (!client.carInfo.workCost) {
+      client.carInfo.workCost = 0;
     }
-    client.workInfo.totalCost = +workCost + this.totalDetailCost;
+    client.workInfo.totalCost = +client.carInfo.workCost + this.totalDetailCost;
     this.addCarToDBIfNotExists(client.carInfo.marque, client.carInfo.model);
+    this.clearForm(addClientForm);
     console.log('Client', client);
   }
 
@@ -239,6 +250,8 @@ export class AddClientComponent implements OnInit {
       cost: detailCost.value
     });
     this.calculateTotalDetailCost();
+    this.detailName.nativeElement.value = '';
+    this.detailCost.nativeElement.value = '';
   }
 
   deleteDetail(carDetailId) {
