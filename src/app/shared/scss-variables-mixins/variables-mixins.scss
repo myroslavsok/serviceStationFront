@@ -2,6 +2,7 @@
 $material-blue: #3F51B5;
 $material-blue-dark: #002984;
 $material-green: #28A745;
+$material-red: #d9534f;
 $material-background-color: #B3E7FA; //delete
 
 //common mixins
@@ -16,12 +17,6 @@ $material-background-color: #B3E7FA; //delete
   max-width: 100%;
   width: $ordinary-width;
 }
-
-@mixin test($border-width, $border-color, $background-color) {
-  border: $border-width solid $border-color;
-  background-color: $background-color;
-}
-
 
 //user navbar
 $navbar-height: 60px; // delete in navbar component

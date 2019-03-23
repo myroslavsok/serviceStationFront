@@ -1,7 +1,49 @@
 @import "../../shared/scss-variables-mixins/variables-mixins.scss";
 
-.client__cars {
+.client__order {
   @include max-width(800px);
    margin: 20px auto;
    border-top: 5px solid $material-blue-dark;
+
+  .expansion__panel {
+    margin: 20px 0;
+  }
+
+  .client__info__table tr td,
+  .car__info__table tr td {
+
+    padding: 5px 20px;
+
+    &:first-child {
+      font-weight: bold;
+    } 
+
+  }
+
+  .detail__info__table {
+    margin-top: 15px;
+
+    tr td,
+    tr th {
+      padding: 5px 20px;
+      text-align: left;
+    }
+
+    tr:last-child td {
+      font-weight: bold;
+    }
+
+  }
+
+  .control__panel {
+    display: flex;
+    justify-content: flex-end;
+
+    .delete__order__btn {
+      background-color: $material-red;
+      color: white;
+    }
+
+  }
+
 }

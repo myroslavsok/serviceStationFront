@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl} from '@angular/forms';
 
 import { crudDBService } from '../../shared/services/crudDB.service';
 
@@ -9,11 +10,10 @@ import { crudDBService } from '../../shared/services/crudDB.service';
 })
 export class SearchClientComponent implements OnInit {
 
-  constructor(private crudDBService: crudDBService) { }
+  constructor(private crudDBService: crudDBService) {
+  }
 
-  clients = [];
-
-  test = [1, 2, 3];
+  clients = []
 
   ngOnInit() {
     this.crudDBService.getClientsArr(() => {
@@ -22,8 +22,6 @@ export class SearchClientComponent implements OnInit {
     });
   }
 
-   read() {
-     console.log('clients', this.clients);
-  }
+  
 
 }

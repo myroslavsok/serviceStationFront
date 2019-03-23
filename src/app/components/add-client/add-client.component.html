@@ -9,7 +9,7 @@
       <h3>Загальна інформація про клєнта</h3>
       <div ngModelGroup="clientInfo" #clientInfo="ngModelGroup">
           <mat-form-field>
-            <input matInput [matDatepicker]="dp" placeholder="Дата оформлення замовлення" [formControl]="date" name="date">
+            <input matInput [matDatepicker]="dp" placeholder="Дата оформлення замовлення" [formControl]="date" name="date" #orderDate>
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
           </mat-form-field>

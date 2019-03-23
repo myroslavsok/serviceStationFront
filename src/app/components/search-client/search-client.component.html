@@ -1,15 +1,74 @@
-<!-- <app-user-navbar></app-user-navbar> -->
-<button (click)="read()">SHOW CLIENTS</button>
 
-<mat-card *ngFor="let clients of clients; let index = index" class="client__cars">
+<mat-card *ngFor="let client of clients" class="client__order">
   <mat-card-header>
-    <mat-card-title>{{ index }}</mat-card-title>
+    <mat-card-title class="client__order__title">{{ client.carInfo.vinCode }} (Загальна вартість замовлення {{ client.workInfo.totalCost }} Грн)</mat-card-title>
+    <mat-card-subtitle>{{ client.clientInfo.date }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
+    <mat-expansion-panel class="expansion__panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Загальна інформація про клієнта</mat-panel-title>
+      </mat-expansion-panel-header>
+      <table class="client__info__table">
+        <tr>
+          <td>ПІБ клієнта:</td>
+          <td>{{ client.clientInfo.name }}</td>
+        </tr>
+        <tr>
+          <td>Номер телефону:</td>
+          <td>{{ client.clientInfo.phoneNumber }}</td>
+        </tr>
+      </table>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expansion__panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Інформація про авто</mat-panel-title>
+      </mat-expansion-panel-header>
+      <table class="car__info__table">
+        <tr>
+          <td>Авто (марка та модель):</td>
+          <td>{{ client.carInfo.marque }} {{ client.carInfo.model }}</td>
+        </tr>
+        <tr>
+          <td>Рік:</td>
+          <td>{{ client.carInfo.carYear }}</td>
+        </tr>
+        <tr>
+          <td>Номер:</td>
+          <td>{{ client.carInfo.carNumber }}</td>
+        </tr>
+        <tr>
+          <td>Пробіг:</td>
+          <td>{{ client.carInfo.miles }}</td>
+        </tr>
+      </table>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expansion__panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Інформація про виконану роботу</mat-panel-title>
+      </mat-expansion-panel-header>
+      <b>Виконана робота (Вартість: {{ client.workInfo.workCost }} Грн)</b>
+      <p>{{ client.workInfo.doneWork }}</p>
+      <b>Використані деталі:</b>
+      <table class="detail__info__table">
+        <tr>
+          <th>Назва</th>
+          <th>Ціна</th>
+        </tr>
+        <tr *ngFor="let detail of client.carInfo.details">
+          <td>{{ detail.name }}</td>
+          <td>{{ detail.cost }}</td>
+        </tr>
+        <tr>
+          <td>Загальна вартість</td>
+          <td>{{ client.workInfo.detailCost }} Грн</td>
+        </tr>
+      </table>
+    </mat-expansion-panel>
   </mat-card-content>
+  <mat-card-actions class="control__panel">
+    <button mat-button class="delete__order__btn">Видалити замовлення</button>
+  </mat-card-actions>
 </mat-card>

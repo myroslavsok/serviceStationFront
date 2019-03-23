@@ -6,8 +6,8 @@ import { map, startWith, filter } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 
 // Imports for date
-import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment from 'moment';
 const moment = _moment;
 export const MY_FORMATS = {
@@ -48,6 +48,7 @@ export class AddClientComponent implements OnInit {
   @ViewChild('carMarque') carMarque: ElementRef;
   @ViewChild('detailName') detailName: ElementRef;
   @ViewChild('detailCost') detailCost: ElementRef;
+  @ViewChild('orderDate') orderDate: ElementRef;
 
 
   // Car's details
@@ -156,10 +157,10 @@ export class AddClientComponent implements OnInit {
       carInfo: addClientForm.value.carInfo,
       workInfo: addClientForm.value.workInfo
     }
-    client.clientInfo.date = this.date.value.utc().format();
+    client.clientInfo.date = this.orderDate.nativeElement.value;
     client.carInfo.marque = this.marqueControl.value;
     client.carInfo.model = this.modelControl.value;
-    client.carInfo.detais = this.carsDetails;
+    client.carInfo.details = this.carsDetails;
     client.workInfo.detailCost = this.totalDetailCost;
     if (!client.workInfo.workCost) {
       client.workInfo.workCost = 0;

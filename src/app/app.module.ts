@@ -20,6 +20,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 
 //firebase
 import { AngularFireModule } from 'angularfire2';
@@ -58,7 +60,9 @@ import { UserNavbarComponent } from './components/user-navbar/user-navbar.compon
     MatCardModule,
     ScrollingModule,
     MatChipsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatExpansionModule,
+    MatTableModule
   ],
   providers: [
     crudDBService
