@@ -83,6 +83,7 @@ export class crudDBService {
 
   private handleError(error) {
     console.log(error);
+    alert('Помилка відправки-отримання інформації з серверу: ' +  error);
   }
 
 }

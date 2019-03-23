@@ -98,11 +98,11 @@ export class AddClientComponent implements OnInit {
   }
 
   addCarToDBIfNotExists(marque, model) {
-    console.log('add car', `${marque}, ${model}`);
     if (!marque || !model) {
-      return this.snackBar.open('Заповніть поля з маркою та моделлю авто', 'Зрозуміло', {
-        duration: 2000,
-      });
+      // return this.snackBar.open('Заповніть поля з маркою та моделлю авто', 'Зрозуміло', {
+      //   duration: 2000,
+      // });
+      return;
     }
     let isCarMarqueNew__key = '';
     let isCarModelNew = false;
@@ -140,13 +140,14 @@ export class AddClientComponent implements OnInit {
     }
   }
 
-  clearForm(form) {
+  clearFormAndFiledValues(form) {
     form.reset();
     this.marqueControl.setValue('');
     this.modelControl.setValue('');
     this.detailName.nativeElement.value = '';
     this.detailCost.nativeElement.value = '';
     this.carsDetails = [];
+    this.totalDetailCost = 0;
   }
 
   addClient(addClientForm) {
@@ -155,22 +156,27 @@ export class AddClientComponent implements OnInit {
       carInfo: addClientForm.value.carInfo,
       workInfo: addClientForm.value.workInfo
     }
-    client.clientInfo.date = this.date.value;
+    client.clientInfo.date = this.date.value.utc().format();
     client.carInfo.marque = this.marqueControl.value;
     client.carInfo.model = this.modelControl.value;
     client.carInfo.detais = this.carsDetails;
     client.workInfo.detailCost = this.totalDetailCost;
-    if (!client.carInfo.workCost) {
-      client.carInfo.workCost = 0;
+    if (!client.workInfo.workCost) {
+      client.workInfo.workCost = 0;
     }
-    client.workInfo.totalCost = +client.carInfo.workCost + this.totalDetailCost;
+    client.workInfo.totalCost = +client.workInfo.workCost + +client.workInfo.detailCost;
     this.addCarToDBIfNotExists(client.carInfo.marque, client.carInfo.model);
-    this.clearForm(addClientForm);
+    this.clearFormAndFiledValues(addClientForm);
     console.log('Client', client);
-    // this.crudDBService.addClient(client);
-    // this.snackBar.open('Клієнт успішно доданий до бази', 'Зрозуміло', {
-    //   duration: 2000,
-    // });
+    try {
+      this.crudDBService.addClient(client);
+      this.snackBar.open('Клієнт успішно доданий до бази', 'Ок', {
+        duration: 2000,
+      }); 
+    } catch (error) {
+      console.log(error)
+      return alert('Помилка при спробі додати інформацію про замовлення клієнта: ' + error + ' Спробуйте заповнити поле з вартістю роботи');
+    }
   }
 
   getCars() {
