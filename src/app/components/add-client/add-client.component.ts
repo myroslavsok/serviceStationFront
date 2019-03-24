@@ -170,7 +170,14 @@ export class AddClientComponent implements OnInit {
   }
 
   setDefaultValuesForEmptyFormFields(client) {
-    console.log('test');
+    for (let categoryKey in client) {
+      for (let key in client[categoryKey]) {
+        if(!client[categoryKey][key] && (typeof client[categoryKey][key] === 'string')) {
+          client[categoryKey][key] = 'Не вказано';
+        }
+      }
+    }
+    return client;
   }
 
   addClient(addClientForm) {
@@ -185,7 +192,7 @@ export class AddClientComponent implements OnInit {
     this.clearFormAndFiledValues(addClientForm);
     console.log('Client', client);
     try {
-      // this.crudDBService.addClient(client);
+      this.crudDBService.addClient(client);
       this.snackBar.open('Клієнт успішно доданий до бази', 'Ок', {
         duration: 2000,
       }); 
@@ -194,11 +201,6 @@ export class AddClientComponent implements OnInit {
       return alert('Помилка при спробі додати інформацію про замовлення клієнта: ' + error + ' Спробуйте заповнити усі поля');
     }
   }
-
-  getCars() {
-    console.log('crud cars', this.crudDBService.cars);
-  }
-
 
   addNewDetail(detailName, detailCost) {
     if (!detailName.value || !detailCost.value) {
