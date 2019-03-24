@@ -81,6 +81,10 @@ export class crudDBService {
     this.clientsList.push(client).catch(error => this.handleError(error));
   }
 
+  deleteClient(key) {
+    this.clientsList.remove(key).catch(error => this.handleError(error));
+  }
+
   private handleError(error) {
     console.log(error);
     alert('Помилка відправки-отримання інформації з серверу: ' +  error);

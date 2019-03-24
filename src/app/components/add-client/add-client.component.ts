@@ -172,11 +172,14 @@ export class AddClientComponent implements OnInit {
   setDefaultValuesForEmptyFormFields(client) {
     for (let categoryKey in client) {
       for (let key in client[categoryKey]) {
-        if(!client[categoryKey][key] && (typeof client[categoryKey][key] === 'string')) {
-          client[categoryKey][key] = 'Не вказано';
+        if (key != 'workCost' && key != 'detailCost' && key != 'totalCost' && key != 'details') {
+          if(!client[categoryKey][key]) {
+            client[categoryKey][key] = 'Не вказано';
+          }
         }
       }
     }
+    console.log('Set defaults client', client);
     return client;
   }
 
@@ -187,8 +190,8 @@ export class AddClientComponent implements OnInit {
       }); 
     }
     let client = this.createClient(addClientForm);
-    client = this.setDefaultValuesForEmptyFormFields(client);
     this.addCarToDBIfNotExists(client.carInfo.marque, client.carInfo.model);
+    client = this.setDefaultValuesForEmptyFormFields(client);
     this.clearFormAndFiledValues(addClientForm);
     console.log('Client', client);
     try {
