@@ -1,5 +1,16 @@
 @import "../../shared/scss-variables-mixins/variables-mixins.scss";
 
+.search__container {
+  @include display-flex(column, center, center);
+  border: 1px solid red;
+
+  .input__search__container {
+    width: 300px;
+    border: 1px solid green;
+  }
+
+}
+
 .client__order {
   @include max-width(800px);
    margin: 20px auto;
