@@ -59,7 +59,7 @@
           <input matInput type="number" placeholder="Рік випуску автомобіля" #carYear autocomplete="off" value="2019" name="carYear" ngModel>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code" name="vinCode" ngModel>
+          <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code" name="vinCode" ngModel required>
         </mat-form-field>
         <mat-form-field>
             <input matInput placeholder="Державний номер" #carNumber autocomplete="off" value="car number" name="carNumber" ngModel>
@@ -99,10 +99,10 @@
         <div>
           <div class="cardetail__info">
             <mat-form-field class="cardetail__info__input">
-              <input matInput #detailName placeholder="Назва">
+              <input matInput #detailName placeholder="Назва" autocomplete="off">
             </mat-form-field>
             <mat-form-field class="cardetail__info__input">
-              <input matInput type="number" #detailCost placeholder="Ціна">
+              <input matInput type="number" #detailCost placeholder="Ціна" autocomplete="off">
             </mat-form-field>
             <button mat-stroked-button color="primary" class="cardetail__info__btn" type="button" (click)="addNewDetail(detailName, detailCost)">Додати запчастину</button>
           </div>

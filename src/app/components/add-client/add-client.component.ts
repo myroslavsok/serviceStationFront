@@ -151,11 +151,11 @@ export class AddClientComponent implements OnInit {
     this.totalDetailCost = 0;
   }
 
-  addClient(addClientForm) {
+  createClient(form) {
     let client = {
-      clientInfo: addClientForm.value.clientInfo,
-      carInfo: addClientForm.value.carInfo,
-      workInfo: addClientForm.value.workInfo
+      clientInfo: form.value.clientInfo,
+      carInfo: form.value.carInfo,
+      workInfo: form.value.workInfo
     }
     client.clientInfo.date = this.orderDate.nativeElement.value;
     client.carInfo.marque = this.marqueControl.value;
@@ -166,17 +166,32 @@ export class AddClientComponent implements OnInit {
       client.workInfo.workCost = 0;
     }
     client.workInfo.totalCost = +client.workInfo.workCost + +client.workInfo.detailCost;
+    return client;
+  }
+
+  setDefaultValuesForEmptyFormFields(client) {
+    console.log('test');
+  }
+
+  addClient(addClientForm) {
+    if (!addClientForm.valid) {
+      return this.snackBar.open(`Поле "Vin-код" є обов'язковим`, 'Ок', {
+        duration: 2000,
+      }); 
+    }
+    let client = this.createClient(addClientForm);
+    client = this.setDefaultValuesForEmptyFormFields(client);
     this.addCarToDBIfNotExists(client.carInfo.marque, client.carInfo.model);
     this.clearFormAndFiledValues(addClientForm);
     console.log('Client', client);
     try {
-      this.crudDBService.addClient(client);
+      // this.crudDBService.addClient(client);
       this.snackBar.open('Клієнт успішно доданий до бази', 'Ок', {
         duration: 2000,
       }); 
     } catch (error) {
       console.log(error)
-      return alert('Помилка при спробі додати інформацію про замовлення клієнта: ' + error + ' Спробуйте заповнити поле з вартістю роботи');
+      return alert('Помилка при спробі додати інформацію про замовлення клієнта: ' + error + ' Спробуйте заповнити усі поля');
     }
   }
 
@@ -186,8 +201,8 @@ export class AddClientComponent implements OnInit {
 
 
   addNewDetail(detailName, detailCost) {
-    if (!detailName.value) {
-      return this.snackBar.open('Вкажіть назву деталі', 'Зрозуміло', {
+    if (!detailName.value || !detailCost.value) {
+      return this.snackBar.open('Вкажіть назву та ціну деталі', 'Зрозуміло', {
         duration: 2000,
       });
     }
