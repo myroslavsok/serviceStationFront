@@ -19,17 +19,17 @@ export class SearchClientComponent implements OnInit {
   clients = [];
 
   ngOnInit() {
-    this.crudDBService.getClientsArr(() => {
-      this.clients = this.crudDBService.clients;
-      console.log('clients', this.clients);
-    });
+    // this.crudDBService.getClientsArr(() => {
+    //   this.clients = this.crudDBService.clients;
+    //   console.log('clients', this.clients);
+    // });
   }
 
   deleteClient(key) {
-    this.crudDBService.deleteClient(key);
-    this.snackBar.open('Успішно видалено', 'Зрозуміло', {
-        duration: 2000,
-      });
+    // this.crudDBService.deleteClient(key);
+    // this.snackBar.open('Успішно видалено', 'Зрозуміло', {
+    //     duration: 2000,
+    //   });
   }
 
 }

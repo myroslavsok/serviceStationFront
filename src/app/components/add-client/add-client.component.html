@@ -1,12 +1,12 @@
 <mat-card class="client__info__card">
     <mat-card-header>
-      <mat-card-title>Вкажіть інформацію про клієнта</mat-card-title>
+      <mat-card-title>Вкажіть інформацію про замовлення</mat-card-title>
       <mat-card-subtitle>поля позначені * є обов'язковими</mat-card-subtitle>
     </mat-card-header>
 
-    <form (ngSubmit)="addClient(addClientForm)"  #addClientForm="ngForm">
+    <form (ngSubmit)="addOrder(addClientForm)"  #addClientForm="ngForm">
     <mat-card-content>
-      <h3>Загальна інформація про клєнта</h3>
+      <h3>Загальна інформація</h3>
       <div ngModelGroup="clientInfo" #clientInfo="ngModelGroup">
           <mat-form-field>
             <input matInput [matDatepicker]="dp" placeholder="Дата оформлення замовлення" [formControl]="date" name="date" #orderDate>
@@ -14,10 +14,10 @@
             <mat-datepicker #dp></mat-datepicker>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="ПІБ" #clientName autocomplete="off" value="Mirek Sokol Test" name="name" ngModel>
+            <input matInput placeholder="ПІБ замовника" #clientName autocomplete="off" name="name" ngModel>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Номер телефону" #clientPhoneNumber autocomplete="off" value="333" name="phoneNumber" ngModel>
+            <input matInput placeholder="Номер телефону" #clientPhoneNumber autocomplete="off" name="phoneNumber" ngModel>
           </mat-form-field>
       </div>
 
@@ -59,7 +59,7 @@
           <input matInput type="number" placeholder="Рік випуску автомобіля" #carYear autocomplete="off" value="2019" name="carYear" ngModel>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code" name="vinCode" ngModel required>
+          <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code" name="vinCode" ngModel>
         </mat-form-field>
         <mat-form-field>
             <input matInput placeholder="Державний номер" #carNumber autocomplete="off" value="car number" name="carNumber" ngModel>

@@ -1,89 +1,93 @@
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 //Models
 import { Car } from '../models/car';
 import { CarNgListElem } from '../models/carNgListElem';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class crudDBService {
 
-  private dbPathCars = '/cars';
-  private dbPathClients = '/clients';
+  constructor(private http: HttpClient) {}
 
-  carsList: AngularFireList<any> = null;
-  cars: Array<Car> = null;
+  ordersUrl = 'http://localhost:8080/orders';
+  clientsUrl = 'http://localhost:8080/clients';
+  // tasksUrs = 'http://localhost:8080/tasks';
 
-  clientsList: AngularFireList<any> = null;
-  clients: Array<any> = null;
-
-  constructor(private firebase: AngularFireDatabase) {
-              this.carsList = this.firebase.list(this.dbPathCars);
-              this.clientsList = this.firebase.list(this.dbPathClients);
+  // Order
+  getOrders() {
+    return this.http.get(this.ordersUrl);
   }
 
-  // CRUD with cars
-  addCar(car: CarNgListElem): void {
-    // console.log('[Service] car add', car);
-    this.carsList.push(car).catch(error => this.handleError(error));
+  addOrder(order) {
+    return this.http.post(this.ordersUrl, order);
   }
 
-  addModelToCar(car: {key: string, model: Array<string>}): void {
-    // console.log('[Service] uppdating models', car);
-    this.carsList.update(car.key, {
-      model: car.model
-    }).catch(error => this.handleError(error));
+  // Client
+  addClient(client) {
+    return this.http.post(this.clientsUrl, {
+      name: client.name,
+      phoneNumber: client.phoneNumber
+    });
   }
 
-  getCarsArr(callback) {
-  //   // Use snapshotChanges().map() to store the key
-  //   // this.crudDBService.getCarsList().snapshotChanges().pipe(
-  //   //   map(changes =>
-  //   //     changes.map(item => ({ key: item.payload.key, ...item.payload.val() }))
-  //   //   )
-  //   // ).subscribe(cars => {
-  //   //   this.cars = cars;
-  //   // });
-    this.carsList.snapshotChanges().subscribe(
-      list => {
-        this.cars = list.map(item => {
-          return {
-            key: item.key,
-            ...item.payload.val()
-          };
-        });
-        callback();
-      }
-    );
+  getClients() {
+    return this.http.get(this.clientsUrl);
   }
 
-  clearCarList(): void {
-    this.carsList.remove().catch(error => this.handleError(error));
-  }
+  
 
+  // // Lists
+  // getLists() {
+  //   return this.http.get(this.listsUrl);
+  // }
 
-  // CRUD with clients
-  getClientsArr(callback) {
-    this.clientsList.snapshotChanges().subscribe(
-      list => {
-        this.clients = list.map(item => {
-          return {
-            key: item.key,
-            ...item.payload.val()
-          };
-        });
-        callback();
-      }
-    );
-  }
+  // addList(listName) {
+  //   return this.http.post(this.listsUrl, {
+  //     name: listName,
+  //     pin: false
+  //   });
+  // }
 
-  addClient(client: any) {
-    this.clientsList.push(client).catch(error => this.handleError(error));
-  }
+  // deleteList(targetList) {
+  //   return this.http.delete(this.listsUrl + `/${targetList.id}`);
+  // }
 
-  deleteClient(key) {
-    this.clientsList.remove(key).catch(error => this.handleError(error));
-  }
+  // pinList(targetList) {
+  //   return this.http.patch(this.listsUrl + `/${targetList.id}`, {
+  //     name: targetList.name,
+  //     pin: targetList.pin
+  //   });
+  // }
+
+  // // Tasks
+  // getTasksFromSelectedList(selectedListId) {
+  //   return this.http.get(this.tasksUrs + `/list/${selectedListId}`);
+  // }
+
+  // addTaskToselectedList(body) {
+  //   return this.http.post(this.tasksUrs, {
+  //     listId: body.listId,
+  //     name: body.name,
+  //     done: false,
+  //   });
+  // }
+
+  // deleteTaskFromSelectedList(targetTaskId) {
+  //   return this.http.delete(this.tasksUrs + `/${targetTaskId}`);
+  // }
+
+  // changeTaskFields(targetTask) {
+  //   console.log('change sevice', targetTask);
+  //   return this.http.patch(this.tasksUrs, {
+  //     id: targetTask.id,
+  //     name: targetTask.name,
+  //     done: targetTask.done,
+  //     listId: targetTask.listId
+  //   });
+  // }
 
   private handleError(error) {
     console.log(error);
