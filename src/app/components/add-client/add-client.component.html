@@ -29,12 +29,12 @@
           placeholder="Марка авто"
           aria-label="Марка авто"
           matInput
-          #carMarque
-          name="carMarque"
-          [formControl]="marqueControl"
-          [matAutocomplete]="autoMarqueField">
-          <mat-autocomplete #autoMarqueField="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptionsMarque | async" [value]="option">
+          #carmake
+          name="carmake"
+          [formControl]="makeControl"
+          [matAutocomplete]="automakeField">
+          <mat-autocomplete #automakeField="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptionsmake | async" [value]="option">
               {{option}}
             </mat-option>
           </mat-autocomplete>

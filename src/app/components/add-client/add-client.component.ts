@@ -39,10 +39,10 @@ export class AddClientComponent implements OnInit {
   constructor(private crudDBService: crudDBService,
               private snackBar: MatSnackBar) { }
 
-  marqueControl = new FormControl();
+  makeControl = new FormControl();
   modelControl = new FormControl();
 
-  @ViewChild('carMarque') carMarque: ElementRef;
+  @ViewChild('carmake') carmake: ElementRef;
   @ViewChild('detailName') detailName: ElementRef;
   @ViewChild('detailCost') detailCost: ElementRef;
   @ViewChild('orderDate') orderDate: ElementRef;
@@ -61,15 +61,15 @@ export class AddClientComponent implements OnInit {
 
   ngOnInit() {
     // this.crudDBService.getCarsArr(() => {
-    //   this.filteredOptionsMarque = this.marqueControl.valueChanges
+    //   this.filteredOptionsmake = this.makeControl.valueChanges
     //     .pipe(
     //       startWith(''),
-    //       map(value => this._filterMarque(value))
+    //       map(value => this._filtermake(value))
     //     );
     // });
   }
 
-  // private _filterMarque(value: string): string[] {
+  // private _filtermake(value: string): string[] {
     // const filterValue = value.toLowerCase();
     // this.filteredOptionsModel = this.modelControl.valueChanges
     //     .pipe(
@@ -77,17 +77,17 @@ export class AddClientComponent implements OnInit {
     //       map(element => this._filterModel(element))
     //     );
     // return this.crudDBService.cars
-    //   .map(item => item.marque)
+    //   .map(item => item.make)
     //   .filter(option => option.toLowerCase().includes(filterValue));
   // }
 
   private _filterModel(value: string): string[] {
     const filterValue = value.toLowerCase();
-    const carMarque = this.carMarque.nativeElement.value;
+    const carmake = this.carmake.nativeElement.value;
     let carModelsArr = [];
     // this.crudDBService.cars
     //   .forEach(item => {
-    //     if (item.marque === carMarque) {
+    //     if (item.make === carmake) {
     //       carModelsArr = item.model;
     //     }
     //   });
@@ -95,18 +95,18 @@ export class AddClientComponent implements OnInit {
       .filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  addCarToDBIfNotExists(marque, model) {
-    if (!marque || !model) {
+  addCarToDBIfNotExists(make, model) {
+    if (!make || !model) {
       // return this.snackBar.open('Заповніть поля з маркою та моделлю авто', 'Зрозуміло', {
       //   duration: 2000,
       // });
       return;
     }
-    let isCarMarqueNew__key = '';
+    let isCarmakeNew__key = '';
     let isCarModelNew = false;
     // this.crudDBService.cars.forEach(item => {
-    //   if (item.marque === marque) {
-    //     isCarMarqueNew__key = item.key;
+    //   if (item.make === make) {
+    //     isCarmakeNew__key = item.key;
     //     item.model.forEach(elem => {
     //       if (elem === model) {
     //         isCarModelNew = true;
@@ -114,25 +114,25 @@ export class AddClientComponent implements OnInit {
     //     });
     //   }
     // });
-    if (isCarMarqueNew__key && isCarModelNew) {
+    if (isCarmakeNew__key && isCarModelNew) {
       // console.log('assign car to client');
-    } else if (isCarMarqueNew__key && !isCarModelNew) {
-      // console.log('adding model to', isCarMarqueNew__key);
+    } else if (isCarmakeNew__key && !isCarModelNew) {
+      // console.log('adding model to', isCarmakeNew__key);
       let existingModels = [];
       // this.crudDBService.cars
       //   .forEach(item => {
-      //     if (item.key === isCarMarqueNew__key) {
+      //     if (item.key === isCarmakeNew__key) {
       //       existingModels = item.model;
       //     }
       //   });
       existingModels.push(model);
       // this.crudDBService.addModelToCar({
-      //   key: isCarMarqueNew__key,
+      //   key: isCarmakeNew__key,
       //   model: existingModels
       // });
-    } else if (!isCarMarqueNew__key) {
+    } else if (!isCarmakeNew__key) {
       // this.crudDBService.addCar({
-      //   marque: marque,
+      //   make: make,
       //   model: [model]
       // });
     }
@@ -145,7 +145,7 @@ export class AddClientComponent implements OnInit {
       workInfo: form.value.workInfo
     }
     client.clientInfo.date = this.orderDate.nativeElement.value;
-    client.carInfo.marque = this.marqueControl.value;
+    client.carInfo.make = this.makeControl.value;
     client.carInfo.model = this.modelControl.value;
     client.carInfo.details = this.carsDetails;
     client.workInfo.detailCost = this.totalDetailCost;
@@ -163,7 +163,7 @@ export class AddClientComponent implements OnInit {
       }); 
     }
     let client = this.createClient(addClientForm);
-    this.addCarToDBIfNotExists(client.carInfo.marque, client.carInfo.model);
+    this.addCarToDBIfNotExists(client.carInfo.make, client.carInfo.model);
     client = this.setDefaultValuesForEmptyFormFields(client);
     this.clearFormAndFiledValues(addClientForm);
     console.log('Client', client);
@@ -218,7 +218,7 @@ export class AddClientComponent implements OnInit {
       workInfo: form.value.workInfo,
       date: this.orderDate.nativeElement.value,
     }
-    order.carInfo.marque = this.marqueControl.value;
+    order.carInfo.make = this.makeControl.value;
     order.carInfo.model = this.modelControl.value;
     order.carInfo.details = this.carsDetails;
     order.workInfo.detailCost = this.totalDetailCost;
@@ -244,7 +244,7 @@ export class AddClientComponent implements OnInit {
 
   clearFormAndFiledValues(form) {
     form.reset();
-    this.marqueControl.setValue('');
+    this.makeControl.setValue('');
     this.modelControl.setValue('');
     this.detailName.nativeElement.value = '';
     this.detailCost.nativeElement.value = '';
@@ -259,16 +259,16 @@ export class AddClientComponent implements OnInit {
       }); 
     }
     let order = this.createOrder(addClientForm);
-    // this.addCarToDBIfNotExists(client.carInfo.marque, client.carInfo.model);
+    // this.addCarToDBIfNotExists(client.carInfo.make, client.carInfo.model);
     order = this.setDefaultValuesForEmptyFormFields(order);
     this.clearFormAndFiledValues(addClientForm);
     console.log('Order', order);
     try {
-      console.log('order.clientInfo', order.clientInfo);
-      this.crudDBService.addClient(order.clientInfo)
-        .subscribe(resp => console.log(resp));
-      // this.crudDBService.addOrder(order)
-      //   .subscribe(resp => console.log('post order resp', resp));
+      // console.log('order.clientInfo', order.clientInfo);
+      // this.crudDBService.addClient(order.clientInfo)
+      //   .subscribe(resp => console.log(resp));
+      this.crudDBService.addOrder(order)
+        .subscribe(resp => console.log('post order resp', resp));
       this.snackBar.open('Клієнт успішно доданий до бази', 'Ок', {
         duration: 2000,
       }); 
