@@ -43,19 +43,19 @@ export class AddClientComponent implements OnInit {
   modelControl = new FormControl();
 
   @ViewChild('carmake') carmake: ElementRef;
-  @ViewChild('detailName') detailName: ElementRef;
-  @ViewChild('detailCost') detailCost: ElementRef;
+  @ViewChild('partName') partName: ElementRef;
+  @ViewChild('partCost') partCost: ElementRef;
   @ViewChild('orderDate') orderDate: ElementRef;
 
 
-  // Car's details
-  carsDetails: Array<{
+  // Car's parts
+  carsparts: Array<{
     id;
     name;
     cost;
   }> = [];
 
-  totalDetailCost: number = 0;
+  totalpartCost: number = 0;
 
   date = new FormControl(moment());
 
@@ -147,12 +147,12 @@ export class AddClientComponent implements OnInit {
     client.clientInfo.date = this.orderDate.nativeElement.value;
     client.carInfo.make = this.makeControl.value;
     client.carInfo.model = this.modelControl.value;
-    client.carInfo.details = this.carsDetails;
-    client.workInfo.detailCost = this.totalDetailCost;
+    client.carInfo.parts = this.carsparts;
+    client.workInfo.partCost = this.totalpartCost;
     if (!client.workInfo.workCost) {
       client.workInfo.workCost = 0;
     }
-    client.workInfo.totalCost = +client.workInfo.workCost + +client.workInfo.detailCost;
+    client.workInfo.totalCost = +client.workInfo.workCost + +client.workInfo.partCost;
     return client;
   }
 
@@ -178,35 +178,35 @@ export class AddClientComponent implements OnInit {
     }
   }
 
-  addNewDetail(detailName, detailCost) {
-    if (!detailName.value || !detailCost.value) {
+  addNewpart(partName, partCost) {
+    if (!partName.value || !partCost.value) {
       return this.snackBar.open('Вкажіть назву та ціну деталі', 'Зрозуміло', {
         duration: 2000,
       });
     }
-    this.carsDetails.push({
-      id: this.carsDetails.length + 1,
-      name: detailName.value,
-      cost: detailCost.value
+    this.carsparts.push({
+      id: this.carsparts.length + 1,
+      name: partName.value,
+      cost: partCost.value
     });
-    this.calculateTotalDetailCost();
-    this.detailName.nativeElement.value = '';
-    this.detailCost.nativeElement.value = '';
+    this.calculateTotalpartCost();
+    this.partName.nativeElement.value = '';
+    this.partCost.nativeElement.value = '';
   }
 
-  deleteDetail(carDetailId) {
-    this.carsDetails = this.carsDetails.filter(detail => {
-      return (detail.id === carDetailId) ? false : true;
+  deletepart(carpartId) {
+    this.carsparts = this.carsparts.filter(part => {
+      return (part.id === carpartId) ? false : true;
     });
-    this.calculateTotalDetailCost();
+    this.calculateTotalpartCost();
   }
 
-  calculateTotalDetailCost() {
-    let detailCost = 0;
-    this.carsDetails.forEach(detail => {
-      detailCost += parseInt(detail.cost);
+  calculateTotalpartCost() {
+    let partCost = 0;
+    this.carsparts.forEach(part => {
+      partCost += parseInt(part.cost);
     });
-    this.totalDetailCost = detailCost;
+    this.totalpartCost = partCost;
   }
 
   // New
@@ -220,19 +220,19 @@ export class AddClientComponent implements OnInit {
     }
     order.carInfo.make = this.makeControl.value;
     order.carInfo.model = this.modelControl.value;
-    order.carInfo.details = this.carsDetails;
-    order.workInfo.detailCost = this.totalDetailCost;
+    order.carInfo.parts = this.carsparts;
+    order.workInfo.partCost = this.totalpartCost;
     if (!order.workInfo.workCost) {
       order.workInfo.workCost = 0;
     }
-    order.workInfo.totalCost = +order.workInfo.workCost + +order.workInfo.detailCost;
+    order.workInfo.totalCost = +order.workInfo.workCost + +order.workInfo.partCost;
     return order;
   }
 
   setDefaultValuesForEmptyFormFields(client) {
     for (let categoryKey in client) {
       for (let key in client[categoryKey]) {
-        if (key != 'workCost' && key != 'detailCost' && key != 'totalCost' && key != 'details') {
+        if (key != 'workCost' && key != 'partCost' && key != 'totalCost' && key != 'parts') {
           if(!client[categoryKey][key]) {
             client[categoryKey][key] = 'Не вказано';
           }
@@ -246,10 +246,10 @@ export class AddClientComponent implements OnInit {
     form.reset();
     this.makeControl.setValue('');
     this.modelControl.setValue('');
-    this.detailName.nativeElement.value = '';
-    this.detailCost.nativeElement.value = '';
-    this.carsDetails = [];
-    this.totalDetailCost = 0;
+    this.partName.nativeElement.value = '';
+    this.partCost.nativeElement.value = '';
+    this.carsparts = [];
+    this.totalpartCost = 0;
   }
 
   addOrder(addClientForm) {

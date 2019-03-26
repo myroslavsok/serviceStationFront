@@ -63,21 +63,21 @@
       <b>Виконана робота (Вартість: {{ client.workInfo.workCost }} Грн)</b>
       <p>{{ client.workInfo.doneWork }}</p>
       <b>Використані деталі:</b>
-      <table *ngIf="client.carInfo.details != undefined; else noDetails" class="detail__info__table">
+      <table *ngIf="client.carInfo.parts != undefined; else noparts" class="part__info__table">
         <tr>
           <th>Назва</th>
           <th>Ціна</th>
         </tr>
-        <tr *ngFor="let detail of client.carInfo.details">
-          <td>{{ detail.name }}</td>
-          <td>{{ detail.cost }}</td>
+        <tr *ngFor="let part of client.carInfo.parts">
+          <td>{{ part.name }}</td>
+          <td>{{ part.cost }}</td>
         </tr>
         <tr>
           <td>Загальна вартість</td>
-          <td>{{ client.workInfo.detailCost }} Грн</td>
+          <td>{{ client.workInfo.partCost }} Грн</td>
         </tr>
       </table>
-      <ng-template #noDetails>
+      <ng-template #noparts>
         <p>Деталі не були використані</p>
       </ng-template>
     </mat-expansion-panel>

@@ -33,14 +33,14 @@ div mat-form-field {
   }
 }
 
-  .cardetail__info {
+  .carpart__info {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     margin-bottom: 20px;
 
-    .cardetail__info__input {
+    .carpart__info__input {
       width: 20%;
       min-width: 200px;
       margin: 0 20px;
@@ -51,7 +51,7 @@ div mat-form-field {
 
     }
 
-    .cardetail__info__btn {
+    .carpart__info__btn {
       margin: 0 20px;
     }
 

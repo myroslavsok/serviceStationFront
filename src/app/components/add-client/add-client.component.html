@@ -62,7 +62,7 @@
           <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code" name="vinCode" ngModel>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Державний номер" #number autocomplete="off" value="car number" name="carNumber" ngModel>
+            <input matInput placeholder="Державний номер" #number autocomplete="off" value="car number" name="number" ngModel>
          </mat-form-field>
          <mat-form-field>
             <input matInput type="number" placeholder="Пробіг (км)" #miles autocomplete="off" value="1000" name="miles" ngModel>
@@ -97,23 +97,23 @@
 
       <h4>Додати запчастину</h4>
         <div>
-          <div class="cardetail__info">
-            <mat-form-field class="cardetail__info__input">
-              <input matInput #detailName placeholder="Назва" autocomplete="off">
+          <div class="carpart__info">
+            <mat-form-field class="carpart__info__input">
+              <input matInput #partName placeholder="Назва" autocomplete="off">
             </mat-form-field>
-            <mat-form-field class="cardetail__info__input">
-              <input matInput type="number" #detailCost placeholder="Ціна" autocomplete="off">
+            <mat-form-field class="carpart__info__input">
+              <input matInput type="number" #partCost placeholder="Ціна" autocomplete="off">
             </mat-form-field>
-            <button mat-stroked-button color="primary" class="cardetail__info__btn" type="button" (click)="addNewDetail(detailName, detailCost)">Додати запчастину</button>
+            <button mat-stroked-button color="primary" class="carpart__info__btn" type="button" (click)="addNewpart(partName, partCost)">Додати запчастину</button>
           </div>
-        <div class="added__details">
-          <mat-chip-list class="detail">
+        <div class="added__parts">
+          <mat-chip-list class="part">
               <mat-chip
-                *ngFor="let carDetail of carsDetails"
-                class="detail__chip">{{ carDetail.name }} <span class="detail__cost">{{ carDetail.cost }} Грн</span> <button (click)="deleteDetail(carDetail.id)" class="detail__delete">✖</button></mat-chip>
+                *ngFor="let carpart of carsparts"
+                class="part__chip">{{ carpart.name }} <span class="part__cost">{{ carpart.cost }} Грн</span> <button (click)="deletepart(carpart.id)" class="part__delete">✖</button></mat-chip>
           </mat-chip-list>
         </div>
-        <h4 class="total__details__cost">Загальна вартість делатей: {{ totalDetailCost }} Грн</h4>
+        <h4 class="total__parts__cost">Загальна вартість делатей: {{ totalpartCost }} Грн</h4>
       </div>
     </mat-card-content>
     <mat-card-actions class="actions__panel">
