@@ -44,7 +44,7 @@ export class AddClientComponent implements OnInit {
 
   @ViewChild('carmake') carmake: ElementRef;
   @ViewChild('partName') partName: ElementRef;
-  @ViewChild('partCost') partCost: ElementRef;
+  @ViewChild('partsCost') partsCost: ElementRef;
   @ViewChild('orderDate') orderDate: ElementRef;
 
 
@@ -55,7 +55,7 @@ export class AddClientComponent implements OnInit {
     cost;
   }> = [];
 
-  totalpartCost: number = 0;
+  totalpartsCost: number = 0;
 
   date = new FormControl(moment());
 
@@ -148,11 +148,11 @@ export class AddClientComponent implements OnInit {
     client.carInfo.make = this.makeControl.value;
     client.carInfo.model = this.modelControl.value;
     client.carInfo.parts = this.carsparts;
-    client.workInfo.partCost = this.totalpartCost;
+    client.workInfo.partsCost = this.totalpartsCost;
     if (!client.workInfo.workCost) {
       client.workInfo.workCost = 0;
     }
-    client.workInfo.totalCost = +client.workInfo.workCost + +client.workInfo.partCost;
+    client.workInfo.totalCost = +client.workInfo.workCost + +client.workInfo.partsCost;
     return client;
   }
 
@@ -178,8 +178,8 @@ export class AddClientComponent implements OnInit {
     }
   }
 
-  addNewpart(partName, partCost) {
-    if (!partName.value || !partCost.value) {
+  addNewpart(partName, partsCost) {
+    if (!partName.value || !partsCost.value) {
       return this.snackBar.open('Вкажіть назву та ціну деталі', 'Зрозуміло', {
         duration: 2000,
       });
@@ -187,26 +187,26 @@ export class AddClientComponent implements OnInit {
     this.carsparts.push({
       id: this.carsparts.length + 1,
       name: partName.value,
-      cost: partCost.value
+      cost: partsCost.value
     });
-    this.calculateTotalpartCost();
+    this.calculateTotalpartsCost();
     this.partName.nativeElement.value = '';
-    this.partCost.nativeElement.value = '';
+    this.partsCost.nativeElement.value = '';
   }
 
   deletepart(carpartId) {
     this.carsparts = this.carsparts.filter(part => {
       return (part.id === carpartId) ? false : true;
     });
-    this.calculateTotalpartCost();
+    this.calculateTotalpartsCost();
   }
 
-  calculateTotalpartCost() {
-    let partCost = 0;
+  calculateTotalpartsCost() {
+    let partsCost = 0;
     this.carsparts.forEach(part => {
-      partCost += parseInt(part.cost);
+      partsCost += parseInt(part.cost);
     });
-    this.totalpartCost = partCost;
+    this.totalpartsCost = partsCost;
   }
 
   // New
@@ -221,18 +221,18 @@ export class AddClientComponent implements OnInit {
     order.carInfo.make = this.makeControl.value;
     order.carInfo.model = this.modelControl.value;
     order.carInfo.parts = this.carsparts;
-    order.workInfo.partCost = this.totalpartCost;
+    order.workInfo.partsCost = this.totalpartsCost;
     if (!order.workInfo.workCost) {
       order.workInfo.workCost = 0;
     }
-    order.workInfo.totalCost = +order.workInfo.workCost + +order.workInfo.partCost;
+    order.workInfo.totalCost = +order.workInfo.workCost + +order.workInfo.partsCost;
     return order;
   }
 
   setDefaultValuesForEmptyFormFields(client) {
     for (let categoryKey in client) {
       for (let key in client[categoryKey]) {
-        if (key != 'workCost' && key != 'partCost' && key != 'totalCost' && key != 'parts') {
+        if (key != 'workCost' && key != 'partsCost' && key != 'totalCost' && key != 'parts') {
           if(!client[categoryKey][key]) {
             client[categoryKey][key] = 'Не вказано';
           }
@@ -247,9 +247,9 @@ export class AddClientComponent implements OnInit {
     this.makeControl.setValue('');
     this.modelControl.setValue('');
     this.partName.nativeElement.value = '';
-    this.partCost.nativeElement.value = '';
+    this.partsCost.nativeElement.value = '';
     this.carsparts = [];
-    this.totalpartCost = 0;
+    this.totalpartsCost = 0;
   }
 
   addOrder(addClientForm) {
