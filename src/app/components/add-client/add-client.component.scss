@@ -58,7 +58,7 @@ div mat-form-field {
   }
 
 
-.added__details {
+.added__parts {
   width: 100%;
   height: 140px;
   overflow-y: auto;
@@ -66,17 +66,17 @@ div mat-form-field {
   border: 1px solid lightgray;
   border-radius: 4px;
 
-  .detail__chip {
+  .part__chip {
     margin: 10px;
   }
 
-  .detail__cost {
+  .part__cost {
     font-weight: bold;
     margin: 10px;
   }
 
-  .detail__delete {
-    font-weight: bold;
+  .part__delete {
+    // font-weight: bold;
     color: lightgray;
     background-color: darkgray;
     border: none;
