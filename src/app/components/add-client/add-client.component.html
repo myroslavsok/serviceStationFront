@@ -104,7 +104,7 @@
             <mat-form-field class="carpart__info__input">
               <input matInput type="number" #partsCost placeholder="Ціна" autocomplete="off">
             </mat-form-field>
-            <button mat-stroked-button color="primary" class="carpart__info__btn" type="button" (click)="addNewpart(partName, partCost)">Додати запчастину</button>
+            <button mat-stroked-button color="primary" class="carpart__info__btn" type="button" (click)="addNewpart(partName, partsCost)">Додати запчастину</button>
           </div>
         <div class="added__parts">
           <mat-chip-list class="part">
@@ -113,7 +113,7 @@
                 class="part__chip">{{ carpart.name }} <span class="part__cost">{{ carpart.cost }} Грн</span> <button (click)="deletepart(carpart.id)" class="part__delete">✖</button></mat-chip>
           </mat-chip-list>
         </div>
-        <h4 class="total__parts__cost">Загальна вартість делатей: {{ totalpartCost }} Грн</h4>
+        <h4 class="total__parts__cost">Загальна вартість делатей: {{ totalpartsCost }} Грн</h4>
       </div>
     </mat-card-content>
     <mat-card-actions class="actions__panel">

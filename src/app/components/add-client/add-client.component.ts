@@ -189,6 +189,7 @@ export class AddClientComponent implements OnInit {
       name: partName.value,
       cost: partsCost.value
     });
+    console.log('parts = ', this.carsparts);
     this.calculateTotalpartsCost();
     this.partName.nativeElement.value = '';
     this.partsCost.nativeElement.value = '';
@@ -216,8 +217,11 @@ export class AddClientComponent implements OnInit {
       clientInfo: form.value.clientInfo,
       carInfo: form.value.carInfo,
       workInfo: form.value.workInfo,
-      date: this.orderDate.nativeElement.value,
+      date: this.date.value._d.toISOString().substring(0,10)
     }
+    // console.log('date = ', this.date.value._d.toISOString().substring(0,10));
+    // console.log('now = ', new Date()); 
+
     order.carInfo.make = this.makeControl.value;
     order.carInfo.model = this.modelControl.value;
     order.carInfo.parts = this.carsparts;
@@ -264,9 +268,6 @@ export class AddClientComponent implements OnInit {
     this.clearFormAndFiledValues(addClientForm);
     console.log('Order', order);
     try {
-      // console.log('order.clientInfo', order.clientInfo);
-      // this.crudDBService.addClient(order.clientInfo)
-      //   .subscribe(resp => console.log(resp));
       this.crudDBService.addOrder(order)
         .subscribe(resp => console.log('post order resp', resp));
       this.snackBar.open('Клієнт успішно доданий до бази', 'Ок', {
