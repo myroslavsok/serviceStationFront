@@ -34,8 +34,8 @@
           [formControl]="makeControl"
           [matAutocomplete]="automakeField">
           <mat-autocomplete #automakeField="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptionsmake | async" [value]="option">
-              {{option}}
+            <mat-option *ngFor="let make of filteredMakes | async" [value]="make">
+              {{make}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -50,8 +50,8 @@
           [formControl]="modelControl"
           [matAutocomplete]="autoModelField">
           <mat-autocomplete #autoModelField="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptionsModel | async" [value]="option">
-              {{option}}
+            <mat-option *ngFor="let model of filteredModels | async" [value]="model">
+              {{model}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -59,7 +59,7 @@
           <input matInput type="number" placeholder="Рік випуску автомобіля" #year autocomplete="off" value="2019" name="year" ngModel>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code" name="vinCode" ngModel>
+          <input matInput placeholder="Vin-код" #vinCode autocomplete="off" value="vin code" name="vinCode" ngModel required>
         </mat-form-field>
         <mat-form-field>
             <input matInput placeholder="Державний номер" #number autocomplete="off" value="car number" name="number" ngModel>

@@ -13,7 +13,7 @@ export class crudDBService {
   constructor(private http: HttpClient) {}
 
   ordersUrl = 'http://localhost:8080/orders';
-  clientsUrl = 'http://localhost:8080/clients';
+  modelsUrl = 'http://localhost:8080/models';
   // tasksUrs = 'http://localhost:8080/tasks';
 
   // Order
@@ -27,6 +27,11 @@ export class crudDBService {
 
   closeAndOpenOrder(key, status): any {
     return this.http.patch(`${this.ordersUrl}/close-open/order/${key}`, status);
+  }
+
+  // Models and makes
+  getModelsAndMakes(): any {
+    return this.http.get(this.modelsUrl);
   }
 
   // Client

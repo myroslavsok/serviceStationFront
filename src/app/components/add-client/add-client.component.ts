@@ -42,6 +42,11 @@ export class AddClientComponent implements OnInit {
   makeControl = new FormControl();
   modelControl = new FormControl();
 
+  filteredMakes: Observable<string[]>;
+  filteredModels: Observable<string[]>;
+
+  carMakes = [];
+
   @ViewChild('carmake') carmake: ElementRef;
   @ViewChild('partName') partName: ElementRef;
   @ViewChild('partsCost') partsCost: ElementRef;
@@ -60,39 +65,43 @@ export class AddClientComponent implements OnInit {
   date = new FormControl(moment());
 
   ngOnInit() {
-    // this.crudDBService.getCarsArr(() => {
-    //   this.filteredOptionsmake = this.makeControl.valueChanges
-    //     .pipe(
-    //       startWith(''),
-    //       map(value => this._filtermake(value))
-    //     );
-    // });
+    this.crudDBService
+      .getModelsAndMakes()
+      .subscribe(respMakes => {
+        console.log('resp models', respMakes);
+        this.carMakes = respMakes;
+        this.filteredMakes = this.makeControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filterMake(value))
+        );
+      });    
   }
 
-  // private _filtermake(value: string): string[] {
-    // const filterValue = value.toLowerCase();
-    // this.filteredOptionsModel = this.modelControl.valueChanges
-    //     .pipe(
-    //       startWith(''),
-    //       map(element => this._filterModel(element))
-    //     );
-    // return this.crudDBService.cars
-    //   .map(item => item.make)
-    //   .filter(option => option.toLowerCase().includes(filterValue));
-  // }
+  private _filterMake(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    this.filteredModels = this.modelControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(element => this._filterModel(element))
+        );
+    return this.carMakes
+      .map(make => make.makeName)
+      .filter(makeName => makeName.toLowerCase().includes(filterValue));
+  }
 
   private _filterModel(value: string): string[] {
     const filterValue = value.toLowerCase();
     const carmake = this.carmake.nativeElement.value;
-    let carModelsArr = [];
-    // this.crudDBService.cars
-    //   .forEach(item => {
-    //     if (item.make === carmake) {
-    //       carModelsArr = item.model;
-    //     }
-    //   });
-    return carModelsArr
-      .filter(option => option.toLowerCase().includes(filterValue));
+    let carModels = [];
+    this.carMakes.forEach(carMake => {
+      if (carMake.makeName === carmake) {
+        carModels = carMake.models;
+      }
+    });
+    return carModels
+      .map(carModels => carModels.modelName)
+      .filter(carModelName => carModelName.toLowerCase().includes(filterValue));
   }
 
   addCarToDBIfNotExists(make, model) {
@@ -138,46 +147,7 @@ export class AddClientComponent implements OnInit {
     }
   }
 
-  createClient(form) {
-    let client = {
-      clientInfo: form.value.clientInfo,
-      carInfo: form.value.carInfo,
-      workInfo: form.value.workInfo
-    }
-    client.clientInfo.date = this.orderDate.nativeElement.value;
-    client.carInfo.make = this.makeControl.value;
-    client.carInfo.model = this.modelControl.value;
-    client.carInfo.parts = this.carsparts;
-    client.workInfo.partsCost = this.totalpartsCost;
-    if (!client.workInfo.workCost) {
-      client.workInfo.workCost = 0;
-    }
-    client.workInfo.totalCost = +client.workInfo.workCost + +client.workInfo.partsCost;
-    return client;
-  }
-
-  addClient(addClientForm) {
-    if (!addClientForm.valid) {
-      return this.snackBar.open(`Поле "Vin-код" є обов'язковим`, 'Ок', {
-        duration: 2000,
-      }); 
-    }
-    let client = this.createClient(addClientForm);
-    this.addCarToDBIfNotExists(client.carInfo.make, client.carInfo.model);
-    client = this.setDefaultValuesForEmptyFormFields(client);
-    this.clearFormAndFiledValues(addClientForm);
-    console.log('Client', client);
-    try {
-      // this.crudDBService.addClient(client);
-      this.snackBar.open('Клієнт успішно доданий до бази', 'Ок', {
-        duration: 2000,
-      }); 
-    } catch (error) {
-      console.log(error)
-      return alert('Помилка при спробі додати інформацію про замовлення клієнта: ' + error + ' Спробуйте заповнити усі поля');
-    }
-  }
-
+  // New
   addNewpart(partName, partsCost) {
     if (!partName.value || !partsCost.value) {
       return this.snackBar.open('Вкажіть назву та ціну деталі', 'Зрозуміло', {
@@ -210,8 +180,6 @@ export class AddClientComponent implements OnInit {
     this.totalpartsCost = partsCost;
   }
 
-  // New
-
   createOrder(form) {
     let order = {
       clientInfo: form.value.clientInfo,
@@ -219,9 +187,6 @@ export class AddClientComponent implements OnInit {
       workInfo: form.value.workInfo,
       date: this.date.value._d.toISOString().substring(0,10)
     }
-    // console.log('date = ', this.date.value._d.toISOString().substring(0,10));
-    // console.log('now = ', new Date()); 
-
     order.carInfo.make = this.makeControl.value;
     order.carInfo.model = this.modelControl.value;
     order.carInfo.parts = this.carsparts;
@@ -263,7 +228,6 @@ export class AddClientComponent implements OnInit {
       }); 
     }
     let order = this.createOrder(addClientForm);
-    // this.addCarToDBIfNotExists(client.carInfo.make, client.carInfo.model);
     order = this.setDefaultValuesForEmptyFormFields(order);
     this.clearFormAndFiledValues(addClientForm);
     console.log('Order', order);
