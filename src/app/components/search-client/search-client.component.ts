@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl} from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
@@ -16,7 +16,10 @@ export class SearchClientComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
 
+  @ViewChild('group') group: ElementRef;
+
   orders = [];
+
 
   searchValue = {
     carInfo: {

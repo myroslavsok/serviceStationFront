@@ -6,6 +6,18 @@
   </mat-form-field>
 </div>
 
+<mat-button-toggle-group #group="matButtonToggleGroup">
+  <mat-button-toggle value="closed" aria-label="Text align left">
+    <!-- <mat-icon>format_align_left</mat-icon> -->
+    closed
+  </mat-button-toggle>
+  <mat-button-toggle value="new" aria-label="Text align center">
+    new
+    <!-- <mat-icon>format_align_center</mat-icon> -->
+  </mat-button-toggle>
+</mat-button-toggle-group>
+<div class="example-selected-value">Selected value: {{group.value}}</div>
+
 <mat-card *ngFor="let order of orders | filterBy: searchValue" class="client__order" [class.is__closed]="order.status === 'closed'">
   <mat-card-header>
     <mat-card-title class="client__order__title">{{ order.carInfo.vinCode }} (Загальна вартість замовлення {{ order.workInfo.totalCost }} Грн)</mat-card-title>
