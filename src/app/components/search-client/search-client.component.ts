@@ -39,10 +39,13 @@ export class SearchClientComponent implements OnInit {
   }
 
   changeStatusOfOrder(key) {
+    this.crudDBService
+    .closeOrder(key)
+    .subscribe(resp => console.log('close resp', resp));
     // this.crudDBService.deleteClient(key);
-    // this.snackBar.open('Успішно видалено', 'Зрозуміло', {
+    // this.snackBar.open('Замовлення успішно видалено', 'Зрозуміло', {
     //     duration: 2000,
-    //   });
+    // });
   }
 
 }

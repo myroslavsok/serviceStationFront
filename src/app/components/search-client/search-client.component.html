@@ -2,12 +2,11 @@
   <mat-form-field appearance="outline" class="input__search__container">
     <mat-label>Пошук по vin-коду</mat-label>
     <input matInput [(ngModel)]="searchValue.carInfo.vinCode" placeholder="Пошук по vin-коду" autocomplete="off">
-    <!-- <input matInput placeholder="Пошук по vin-коду" autocomplete="off"> -->
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </div>
 
-<mat-card *ngFor="let order of orders | filterBy: searchValue" class="client__order">
+<mat-card *ngFor="let order of orders | filterBy: searchValue" class="client__order" [class.is__closed]="order.status === 'closed'">
   <mat-card-header>
     <mat-card-title class="client__order__title">{{ order.carInfo.vinCode }} (Загальна вартість замовлення {{ order.workInfo.totalCost }} Грн)</mat-card-title>
     <mat-card-subtitle>{{ order.date }}</mat-card-subtitle>
@@ -84,6 +83,14 @@
     </mat-expansion-panel>
   </mat-card-content>
   <mat-card-actions class="control__panel">
-    <button mat-button class="delete__order__btn" (click)="deleteClient(order.key)">Видалити замовлення</button>
+    <button 
+      *ngIf="order.status === 'closed'; else newOrder"
+      mat-button
+      class="restore__order__btn"
+      (click)="changeStatusOfOrder(order.key)"
+    >Resore</button>
+    <ng-template #newOrder>
+      <button mat-button class="close__order__btn" (click)="changeStatusOfOrder(order.key)">Видалити замовлення</button>
+    </ng-template>
   </mat-card-actions>
 </mat-card>

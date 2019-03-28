@@ -1,5 +1,20 @@
 @import "../../shared/scss-variables-mixins/variables-mixins.scss";
 
+.is__closed {
+  opacity: .3;
+  transition: all .3s linear;
+
+  .restore__order__btn {
+    background-color: $material-blue-dark;
+    color: white;
+  }
+
+}
+
+.is__closed:hover {
+  opacity: .7;
+}
+
 .search__container {
   @include display-flex(column, center, center);
 
@@ -50,7 +65,7 @@
     display: flex;
     justify-content: flex-end;
 
-    .delete__order__btn {
+    .close__order__btn {
       background-color: $material-red;
       color: white;
     }
