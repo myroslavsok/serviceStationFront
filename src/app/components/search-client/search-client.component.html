@@ -87,10 +87,10 @@
       *ngIf="order.status === 'closed'; else newOrder"
       mat-button
       class="restore__order__btn"
-      (click)="changeStatusOfOrder(order.key)"
+      (click)="changeStatusOfOrder(order.key, order.status)"
     >Resore</button>
     <ng-template #newOrder>
-      <button mat-button class="close__order__btn" (click)="changeStatusOfOrder(order.key)">Видалити замовлення</button>
+      <button mat-button class="close__order__btn" (click)="changeStatusOfOrder(order.key, order.status)">Видалити замовлення</button>
     </ng-template>
   </mat-card-actions>
 </mat-card>

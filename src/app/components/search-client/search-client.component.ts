@@ -38,10 +38,22 @@ export class SearchClientComponent implements OnInit {
     }
   }
 
-  changeStatusOfOrder(key) {
+  changeStatusOfOrder(key, status) {
+    if (status === 'closed') {
+      status = 'new';
+    } else {
+      status = 'closed'
+    }
     this.crudDBService
-    .closeOrder(key)
-    .subscribe(resp => console.log('close resp', resp));
+    .closeAndOpenOrder(key, status)
+    .subscribe(resp => {
+      console.log('close resp', resp);
+      this.orders.forEach(order => {
+        if (order.key === key) {
+          order.status = resp.status;
+        }
+      });      
+    });
     // this.crudDBService.deleteClient(key);
     // this.snackBar.open('Замовлення успішно видалено', 'Зрозуміло', {
     //     duration: 2000,

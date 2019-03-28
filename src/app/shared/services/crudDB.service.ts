@@ -25,8 +25,8 @@ export class crudDBService {
     return this.http.post(this.ordersUrl, order);
   }
 
-  closeOrder(key) {
-    return this.http.patch(`${this.ordersUrl}/close/${key}`, 'closed');
+  closeAndOpenOrder(key, status): any {
+    return this.http.patch(`${this.ordersUrl}/close-open/order/${key}`, status);
   }
 
   // Client
