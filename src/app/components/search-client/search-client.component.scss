@@ -2,18 +2,18 @@
 
 .search__container {
   @include display-flex(column, center, center);
-  border: 1px solid red;
 
   .input__search__container {
     width: 300px;
-    border: 1px solid green;
+    margin: 20px auto 0 auto;
   }
 
 }
 
+
 .client__order {
   @include max-width(800px);
-   margin: 20px auto;
+   margin: 0 auto 20px auto;
    border-top: 5px solid $material-blue-dark;
 
   .expansion__panel {
@@ -27,11 +27,11 @@
 
     &:first-child {
       font-weight: bold;
-    } 
+    }
 
   }
 
-  .part__info__table {
+  .detail__info__table {
     margin-top: 15px;
 
     tr td,

@@ -16,16 +16,29 @@ export class SearchClientComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
 
-  clients = [];
+  orders = [];
+
+  searchValue = {
+    carInfo: {
+      vinCode: ''
+    }
+  };
 
   ngOnInit() {
-    // this.crudDBService.getClientsArr(() => {
-    //   this.clients = this.crudDBService.clients;
-    //   console.log('clients', this.clients);
-    // });
+    try {
+      this.crudDBService
+        .getOrders()
+        .subscribe(resp => {
+          console.log('get response', resp);
+          this.orders = resp;
+        });
+    } catch(err) {
+      alert('Error');
+      console.log('Caught error', err);
+    }
   }
 
-  deleteClient(key) {
+  changeStatusOfOrder(key) {
     // this.crudDBService.deleteClient(key);
     // this.snackBar.open('Успішно видалено', 'Зрозуміло', {
     //     duration: 2000,

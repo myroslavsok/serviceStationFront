@@ -1,15 +1,16 @@
 <div class="search__container">
   <mat-form-field appearance="outline" class="input__search__container">
     <mat-label>Пошук по vin-коду</mat-label>
-    <input matInput placeholder="Пошук по vin-коду">
+    <input matInput [(ngModel)]="searchValue.carInfo.vinCode" placeholder="Пошук по vin-коду" autocomplete="off">
+    <!-- <input matInput placeholder="Пошук по vin-коду" autocomplete="off"> -->
     <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>  
+  </mat-form-field>
 </div>
 
-<mat-card *ngFor="let client of clients" class="client__order">
+<mat-card *ngFor="let order of orders | filterBy: searchValue" class="client__order">
   <mat-card-header>
-    <mat-card-title class="client__order__title">{{ client.carInfo.vinCode }} (Загальна вартість замовлення {{ client.workInfo.totalCost }} Грн)</mat-card-title>
-    <mat-card-subtitle>{{ client.clientInfo.date }}</mat-card-subtitle>
+    <mat-card-title class="client__order__title">{{ order.carInfo.vinCode }} (Загальна вартість замовлення {{ order.workInfo.totalCost }} Грн)</mat-card-title>
+    <mat-card-subtitle>{{ order.date }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <mat-expansion-panel class="expansion__panel">
@@ -19,11 +20,11 @@
       <table class="client__info__table">
         <tr>
           <td>ПІБ клієнта:</td>
-          <td>{{ client.clientInfo.name }}</td>
+          <td>{{ order.clientInfo.name }}</td>
         </tr>
         <tr>
           <td>Номер телефону:</td>
-          <td>{{ client.clientInfo.phoneNumber }}</td>
+          <td>{{ order.clientInfo.phoneNumber }}</td>
         </tr>
       </table>
     </mat-expansion-panel>
@@ -35,23 +36,23 @@
       <table class="car__info__table">
         <tr>
           <td>Марка:</td>
-          <td>{{ client.carInfo.marque }}</td>
+          <td>{{ order.carInfo.make }}</td>
         </tr>
         <tr>
           <td>Модель:</td>
-          <td>{{ client.carInfo.model }}</td>
+          <td>{{ order.carInfo.model }}</td>
         </tr>
         <tr>
           <td>Рік:</td>
-          <td>{{ client.carInfo.year }}</td>
+          <td>{{ order.carInfo.year }}</td>
         </tr>
         <tr>
           <td>Номер:</td>
-          <td>{{ client.carInfo.number }}</td>
+          <td>{{ order.carInfo.number }}</td>
         </tr>
         <tr>
           <td>Пробіг:</td>
-          <td>{{ client.carInfo.miles }}</td>
+          <td>{{ order.carInfo.miles }}</td>
         </tr>
       </table>
     </mat-expansion-panel>
@@ -60,29 +61,29 @@
       <mat-expansion-panel-header>
         <mat-panel-title>Інформація про виконану роботу</mat-panel-title>
       </mat-expansion-panel-header>
-      <b>Виконана робота (Вартість: {{ client.workInfo.workCost }} Грн)</b>
-      <p>{{ client.workInfo.doneWork }}</p>
-      <b>Використані деталі:</b>
-      <table *ngIf="client.carInfo.parts != undefined; else noparts" class="part__info__table">
+      <b>Виконана робота (Вартість: {{ order.workInfo.workCost }} Грн)</b>
+      <p>{{ order.workInfo.doneWork }}</p>
+      <table *ngIf="order.carInfo.parts.length >= 1; else noDetails" class="detail__info__table">
+        <b>Використані деталі:</b>
         <tr>
           <th>Назва</th>
           <th>Ціна</th>
         </tr>
-        <tr *ngFor="let part of client.carInfo.parts">
+        <tr *ngFor="let part of order.carInfo.parts">
           <td>{{ part.name }}</td>
           <td>{{ part.cost }}</td>
         </tr>
         <tr>
           <td>Загальна вартість</td>
-          <td>{{ client.workInfo.partCost }} Грн</td>
+          <td>{{ order.workInfo.partsCost }} Грн</td>
         </tr>
       </table>
-      <ng-template #noparts>
-        <p>Деталі не були використані</p>
+      <ng-template #noDetails>
+        <b>Деталі не були використані</b>
       </ng-template>
     </mat-expansion-panel>
   </mat-card-content>
   <mat-card-actions class="control__panel">
-    <button mat-button class="delete__order__btn" (click)="deleteClient(client.key)">Видалити замовлення</button>
+    <button mat-button class="delete__order__btn" (click)="deleteClient(order.key)">Видалити замовлення</button>
   </mat-card-actions>
 </mat-card>

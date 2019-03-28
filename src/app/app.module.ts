@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HttpClientModule } from '@angular/common/http';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 //materia design modules
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -45,6 +46,7 @@ import { UserNavbarComponent } from './components/user-navbar/user-navbar.compon
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FilterPipeModule,
     FormsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,

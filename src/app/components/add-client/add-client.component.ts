@@ -270,13 +270,13 @@ export class AddClientComponent implements OnInit {
     try {
       this.crudDBService.addOrder(order)
         .subscribe(resp => console.log('post order resp', resp));
-      this.snackBar.open('Клієнт успішно доданий до бази', 'Ок', {
-        duration: 2000,
-      }); 
     } catch (error) {
       console.log(error)
       return alert('Помилка при спробі додати інформацію про замовлення клієнта: ' + error + ' Спробуйте заповнити усі поля');
     }
+    this.snackBar.open('Клієнт успішно доданий до бази', 'Ок', {
+      duration: 2000,
+    }); 
   }
 
 

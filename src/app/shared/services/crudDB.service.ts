@@ -17,7 +17,7 @@ export class crudDBService {
   // tasksUrs = 'http://localhost:8080/tasks';
 
   // Order
-  getOrders() {
+  getOrders(): any {
     return this.http.get(this.ordersUrl);
   }
 
@@ -26,16 +26,12 @@ export class crudDBService {
   }
 
   // Client
-  addClient(client) {
-    return this.http.post(this.clientsUrl, {
-      name: client.name,
-      phoneNumber: client.phoneNumber
-    });
-  }
-
-  getClients() {
-    return this.http.get(this.clientsUrl);
-  }
+  // addClient(client) {
+  //   return this.http.post(this.clientsUrl, {
+  //     name: client.name,
+  //     phoneNumber: client.phoneNumber
+  //   });
+  // }
 
   
 
