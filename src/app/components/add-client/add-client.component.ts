@@ -104,49 +104,6 @@ export class AddClientComponent implements OnInit {
       .filter(carModelName => carModelName.toLowerCase().includes(filterValue));
   }
 
-  addCarToDBIfNotExists(make, model) {
-    if (!make || !model) {
-      // return this.snackBar.open('Заповніть поля з маркою та моделлю авто', 'Зрозуміло', {
-      //   duration: 2000,
-      // });
-      return;
-    }
-    let isCarmakeNew__key = '';
-    let isCarModelNew = false;
-    // this.crudDBService.cars.forEach(item => {
-    //   if (item.make === make) {
-    //     isCarmakeNew__key = item.key;
-    //     item.model.forEach(elem => {
-    //       if (elem === model) {
-    //         isCarModelNew = true;
-    //       }
-    //     });
-    //   }
-    // });
-    if (isCarmakeNew__key && isCarModelNew) {
-      // console.log('assign car to client');
-    } else if (isCarmakeNew__key && !isCarModelNew) {
-      // console.log('adding model to', isCarmakeNew__key);
-      let existingModels = [];
-      // this.crudDBService.cars
-      //   .forEach(item => {
-      //     if (item.key === isCarmakeNew__key) {
-      //       existingModels = item.model;
-      //     }
-      //   });
-      existingModels.push(model);
-      // this.crudDBService.addModelToCar({
-      //   key: isCarmakeNew__key,
-      //   model: existingModels
-      // });
-    } else if (!isCarmakeNew__key) {
-      // this.crudDBService.addCar({
-      //   make: make,
-      //   model: [model]
-      // });
-    }
-  }
-
   // New
   addNewpart(partName, partsCost) {
     if (!partName.value || !partsCost.value) {
