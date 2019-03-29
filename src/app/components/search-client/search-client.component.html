@@ -6,17 +6,14 @@
   </mat-form-field>
 </div>
 
-<mat-button-toggle-group #group="matButtonToggleGroup">
-  <mat-button-toggle value="closed" aria-label="Text align left">
-    <!-- <mat-icon>format_align_left</mat-icon> -->
-    closed
-  </mat-button-toggle>
-  <mat-button-toggle value="new" aria-label="Text align center">
-    new
-    <!-- <mat-icon>format_align_center</mat-icon> -->
-  </mat-button-toggle>
+<mat-button-toggle-group 
+  [(ngModel)]="searchValue.status"
+  #statusGroup="matButtonToggleGroup"
+  [value]="searchValue.status"
+  class="status__filter">
+  <mat-button-toggle value="new">Актуальні</mat-button-toggle>
+  <mat-button-toggle value="closed">Виконанні</mat-button-toggle>
 </mat-button-toggle-group>
-<div class="example-selected-value">Selected value: {{group.value}}</div>
 
 <mat-card *ngFor="let order of orders | filterBy: searchValue" class="client__order" [class.is__closed]="order.status === 'closed'">
   <mat-card-header>

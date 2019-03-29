@@ -3,6 +3,7 @@ import { FormControl} from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
 import { crudDBService } from '../../shared/services/crudDB.service';
+import { group } from '@angular/animations';
 
 @Component({
   selector: 'app-search-client',
@@ -13,18 +14,15 @@ export class SearchClientComponent implements OnInit {
 
   constructor(
     private crudDBService: crudDBService,
-    private snackBar: MatSnackBar
-  ) {}
-
-  @ViewChild('group') group: ElementRef;
+    private snackBar: MatSnackBar) { }
 
   orders = [];
-
 
   searchValue = {
     carInfo: {
       vinCode: ''
-    }
+    },
+    status: ''
   };
 
   ngOnInit() {
@@ -34,6 +32,7 @@ export class SearchClientComponent implements OnInit {
         .subscribe(resp => {
           console.log('get response', resp);
           this.orders = resp;
+          this.searchValue.status = 'new';
         });
     } catch(err) {
       alert('Error');
