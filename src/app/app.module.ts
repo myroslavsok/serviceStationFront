@@ -33,13 +33,15 @@ import { crudDBService } from './shared/services/crudDB.service';
 import { AddClientComponent } from './components/add-client/add-client.component';
 import { SearchClientComponent } from './components/search-client/search-client.component';
 import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddClientComponent,
     SearchClientComponent,
-    UserNavbarComponent
+    UserNavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

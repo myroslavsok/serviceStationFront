@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 //Models
 import { Car } from '../models/car';
 import { CarNgListElem } from '../models/carNgListElem';
+import { post } from 'selenium-webdriver/http';
+
+
+export interface User {
+  userName: string;
+  password: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +22,21 @@ export class crudDBService {
 
   ordersUrl = 'http://localhost:8080/orders';
   modelsUrl = 'http://localhost:8080/models';
+  loginUrl = 'http://localhost:8080/login';
   // tasksUrs = 'http://localhost:8080/tasks';
+
+  token = '';
+
+  setToken(token){
+    this.token = token;
+  }
 
   // Order
   getOrders(): any {
     return this.http.get(this.ordersUrl);
   }
 
-  addOrder(order) {
+  addOrder(order): any {
     return this.http.post(this.ordersUrl, order);
   }
 
@@ -33,6 +48,16 @@ export class crudDBService {
   getModelsAndMakes(): any {
     return this.http.get(this.modelsUrl);
   }
+
+  // Login
+  authenticate(credentials) {
+    return this.http.post(this.loginUrl, credentials);
+  }
+
+  login(cred) {
+    return this.http.post(this.loginUrl, cred);
+  }
+
 
   // Client
   // addClient(client) {
